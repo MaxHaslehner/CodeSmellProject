@@ -439,4 +439,79 @@ public class Cashier {
         this.takeOrder(batch4Orders);
         System.out.println("Batch execution initiated");
     }
+
+    private java.util.Map<String, java.util.List<String>> customerTransactionLog = new java.util.HashMap<>();
+    private java.util.Map<String, String> paymentGateways = new java.util.HashMap<>();
+
+    public void integrateMultiplePaymentGateways(String gateway1Name, String gateway1ApiKey, boolean gateway1Active, String gateway2Name, String gateway2ApiKey, boolean gateway2Active, String gateway3Name, String gateway3ApiKey, boolean gateway3Active) {
+        System.out.println("Integrating multiple payment gateways");
+        paymentGateways.put(gateway1Name, gateway1ApiKey);
+        paymentGateways.put(gateway2Name, gateway2ApiKey);
+        paymentGateways.put(gateway3Name, gateway3ApiKey);
+        System.out.println("Gateway 1: " + gateway1Name + " - Active: " + gateway1Active);
+        System.out.println("Gateway 2: " + gateway2Name + " - Active: " + gateway2Active);
+        System.out.println("Gateway 3: " + gateway3Name + " - Active: " + gateway3Active);
+        if (gateway1Active) this.processPayment(0, gateway1Name, "", "");
+        if (gateway2Active) this.processPayment(0, gateway2Name, "", "");
+        if (gateway3Active) this.processPayment(0, gateway3Name, "", "");
+    }
+
+    public void processComplexCustomerReturnRequest(String customerId, String orderId, String itemsReturned, double refundAmount, String reason, boolean restockItems, String returnWindowExpiry, String approvalStatus) {
+        System.out.println("Processing return for customer: " + customerId);
+        System.out.println("Order ID: " + orderId);
+        System.out.println("Items Returned: " + itemsReturned);
+        System.out.println("Refund Amount: " + refundAmount);
+        System.out.println("Reason: " + reason);
+        System.out.println("Restock Items: " + restockItems);
+        System.out.println("Return Window Expiry: " + returnWindowExpiry);
+        System.out.println("Approval Status: " + approvalStatus);
+        if (customerTransactionLog.containsKey(customerId)) {
+            java.util.List<String> logs = customerTransactionLog.get(customerId);
+            logs.add("Return: " + orderId);
+        } else {
+            java.util.List<String> logs = new java.util.ArrayList<>();
+            logs.add("Return: " + orderId);
+            customerTransactionLog.put(customerId, logs);
+        }
+        this.processRefund(refundAmount, orderId, reason, "Pending", "System");
+    }
+
+    public void generateDetailedSalesAnalyticsReport(String startDate, String endDate, double totalRevenue, int totalTransactions, double avgTransactionValue, String topProduct, int topProductCount, String worstProduct, int worstProductCount) {
+        System.out.println("\n=== Detailed Sales Analytics Report ===");
+        System.out.println("Period: " + startDate + " to " + endDate);
+        System.out.println("Total Revenue: $" + totalRevenue);
+        System.out.println("Total Transactions: " + totalTransactions);
+        System.out.println("Average Transaction Value: $" + avgTransactionValue);
+        System.out.println("Top Product: " + topProduct + " (" + topProductCount + " sold)");
+        System.out.println("Worst Product: " + worstProduct + " (" + worstProductCount + " sold)");
+        System.out.println("Payment Gateways Configured: " + paymentGateways.size());
+        for (String gateway : paymentGateways.keySet()) {
+            System.out.println("  - " + gateway);
+        }
+        System.out.println("Customer Transactions Logged: " + customerTransactionLog.size());
+        System.out.println("Settlement Records: " + settlementRecords.size());
+    }
+
+    public void handleComplexDiscountCombinations(String customerId, boolean loyaltyMemberDiscount, boolean firstTimeDiscount, boolean bundleDiscount, boolean seasonalDiscount, double baseAmount, String combinationStrategy) {
+        System.out.println("Calculating complex discount combinations for: " + customerId);
+        double finalAmount = baseAmount;
+        if (loyaltyMemberDiscount) {
+            finalAmount = finalAmount * 0.95;
+            System.out.println("Loyalty Member: -5%");
+        }
+        if (firstTimeDiscount) {
+            finalAmount = finalAmount * 0.90;
+            System.out.println("First Time: -10%");
+        }
+        if (bundleDiscount) {
+            finalAmount = finalAmount * 0.85;
+            System.out.println("Bundle: -15%");
+        }
+        if (seasonalDiscount) {
+            finalAmount = finalAmount * 0.80;
+            System.out.println("Seasonal: -20%");
+        }
+        System.out.println("Strategy: " + combinationStrategy);
+        System.out.println("Original: $" + baseAmount + " -> Final: $" + finalAmount);
+    }
 }

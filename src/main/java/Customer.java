@@ -482,4 +482,85 @@ public class Customer {
             System.out.println("  Preference " + (i+1) + ": " + preferenceList.get(i));
         }
     }
+
+    private java.util.Map<String, String> customizationOptions = new java.util.HashMap<>();
+    private java.util.List<String> orderCustomizations = new java.util.ArrayList<>();
+
+    public void configureAdvancedOrderCustomizations(String crustType, String sauceType, String cheeseAmount, String toppingSelection, String bakedGoodsAddOn, String drinkSelection, String dessertsSelection, String specialRequests) {
+        System.out.println("Configuring advanced order customizations for: " + firstName);
+        customizationOptions.put("Crust", crustType);
+        customizationOptions.put("Sauce", sauceType);
+        customizationOptions.put("Cheese", cheeseAmount);
+        customizationOptions.put("Toppings", toppingSelection);
+        customizationOptions.put("BakedGoods", bakedGoodsAddOn);
+        customizationOptions.put("Drink", drinkSelection);
+        customizationOptions.put("Desserts", dessertsSelection);
+        System.out.println("Crust: " + crustType);
+        System.out.println("Sauce: " + sauceType);
+        System.out.println("Cheese: " + cheeseAmount);
+        System.out.println("Toppings: " + toppingSelection);
+        System.out.println("Add-ons: " + bakedGoodsAddOn);
+        System.out.println("Drink: " + drinkSelection);
+        System.out.println("Desserts: " + dessertsSelection);
+        System.out.println("Special Requests: " + specialRequests);
+        orderCustomizations.add(crustType + "-" + sauceType + "-" + toppingSelection);
+    }
+
+    public void submitLongDetailedSurveyResponse(String q1Response, String q2Response, String q3Response, String q4Response, String q5Response, String q6Response, int overallRating, String additionalComments) {
+        System.out.println("Survey Response from: " + firstName);
+        System.out.println("Q1: " + q1Response);
+        System.out.println("Q2: " + q2Response);
+        System.out.println("Q3: " + q3Response);
+        System.out.println("Q4: " + q4Response);
+        System.out.println("Q5: " + q5Response);
+        System.out.println("Q6: " + q6Response);
+        System.out.println("Overall Rating: " + overallRating);
+        System.out.println("Additional Comments: " + additionalComments);
+        reviewNotes.add("Q1: " + q1Response);
+        reviewNotes.add("Q2: " + q2Response);
+        reviewNotes.add("Rating: " + overallRating);
+        ratingHistory.put("Survey", overallRating);
+        this.complain("Survey submitted");
+    }
+
+    public void trackOrderDeliveryAndFeedback(String orderId, String deliveryTime, String carrierName, String estimatedDeliveryWindow, boolean deliveredOnTime, String packageCondition, String deliveryExperience) {
+        System.out.println("Tracking delivery for order: " + orderId);
+        System.out.println("Delivery Time: " + deliveryTime);
+        System.out.println("Carrier: " + carrierName);
+        System.out.println("Estimated Window: " + estimatedDeliveryWindow);
+        System.out.println("On Time: " + deliveredOnTime);
+        System.out.println("Package Condition: " + packageCondition);
+        System.out.println("Delivery Experience: " + deliveryExperience);
+        orderHistory.add(orderId);
+        orderHistory.add(deliveryTime);
+        reviewNotes.add("Delivery: " + orderId + " - " + deliveryExperience);
+        if (!deliveredOnTime) {
+            this.complain("Late delivery for order " + orderId);
+        }
+    }
+
+    public void generateExtendedCustomerLifetimeValueAnalysis() {
+        System.out.println("\n=== Extended Customer Lifetime Value Analysis ===");
+        System.out.println("Customer: " + firstName + " " + lastName);
+        System.out.println("Email: " + email);
+        System.out.println("Phone: " + phoneNumber);
+        System.out.println("Address: " + address);
+        System.out.println("Loyalty Points Balance: " + loyaltyPoints);
+        System.out.println("Total Orders Placed: " + orderHistory.size());
+        System.out.println("Total Order Customizations: " + orderCustomizations.size());
+        double totalSpent = 0;
+        for (Double amount : spendingHistory) {
+            totalSpent += amount;
+        }
+        System.out.println("Lifetime Spending: $" + totalSpent);
+        System.out.println("Average Order Value: $" + (orderHistory.size() > 0 ? totalSpent / orderHistory.size() : 0));
+        System.out.println("Subscription Plans: " + subscriptionPlans.size());
+        System.out.println("Active Subscriptions: " + subscriptionHistory.size());
+        System.out.println("Referrals Generated: " + referralHistory.size());
+        System.out.println("Support Complaints: " + complaintHistory.size());
+        System.out.println("Customer Customizations:");
+        for (String key : customizationOptions.keySet()) {
+            System.out.println("  " + key + ": " + customizationOptions.get(key));
+        }
+    }
 }
