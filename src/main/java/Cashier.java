@@ -192,4 +192,58 @@ public class Cashier {
     public void accessInternalDetails() {
         System.out.println("Accessing internal details of Chef: " + chef.isBusy());
     }
+
+    private java.util.List<String> transactionHistory = new java.util.ArrayList<>();
+    private int totalTransactions = 0;
+    private double totalCashProcessed = 0;
+
+    public void processBulkPayments(String cust1, double amt1, String cust2, double amt2, String cust3, double amt3, String cust4, double amt4) {
+        System.out.println("Processing bulk payments");
+        this.processPaymentForCustomer(cust1, amt1);
+        this.processPaymentForCustomer(cust2, amt2);
+        this.processPaymentForCustomer(cust3, amt3);
+        this.processPaymentForCustomer(cust4, amt4);
+        System.out.println("Bulk processing complete");
+    }
+
+    public void processPaymentForCustomer(String customerName, double amount) {
+        System.out.println("Processing payment for " + customerName + ": " + amount);
+        this.transactionHistory.add(customerName + ": " + amount);
+        this.totalTransactions++;
+        this.totalCashProcessed += amount;
+        this.takeOrder("ProcessedOrder");
+        System.out.println("Transaction recorded");
+    }
+
+    public void applyMultipleDiscountsSequentially(String customerId, double orderAmount, boolean memberDiscount, boolean seasonalDiscount, boolean referralDiscount, boolean flashSaleDiscount) {
+        System.out.println("Applying discounts for customer: " + customerId);
+        double discountedAmount = orderAmount;
+        if (memberDiscount) {
+            discountedAmount = discountedAmount * 0.95;
+            System.out.println("Member discount applied");
+        }
+        if (seasonalDiscount) {
+            discountedAmount = discountedAmount * 0.90;
+            System.out.println("Seasonal discount applied");
+        }
+        if (referralDiscount) {
+            discountedAmount = discountedAmount * 0.85;
+            System.out.println("Referral discount applied");
+        }
+        if (flashSaleDiscount) {
+            discountedAmount = discountedAmount * 0.75;
+            System.out.println("Flash sale discount applied");
+        }
+        System.out.println("Original: " + orderAmount + ", Final: " + discountedAmount);
+    }
+
+    public void generateTransactionReport() {
+        System.out.println("\n=== Transaction Report ===");
+        System.out.println("Total Transactions: " + totalTransactions);
+        System.out.println("Total Cash Processed: " + totalCashProcessed);
+        System.out.println("Average Transaction: " + (totalTransactions > 0 ? totalCashProcessed / totalTransactions : 0));
+        for (int i = 0; i < transactionHistory.size(); i++) {
+            System.out.println("  Transaction " + (i+1) + ": " + transactionHistory.get(i));
+        }
+    }
 }

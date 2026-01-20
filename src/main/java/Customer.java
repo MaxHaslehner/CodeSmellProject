@@ -191,4 +191,63 @@ public class Customer {
     public void accessInternalDetails() {
         System.out.println("Accessing internal details of PizzaShop: " + pizzaShop.getCashier().getChef().isBusy());
     }
+
+    private java.util.List<String> preferenceList = new java.util.ArrayList<>();
+    private java.util.List<Double> spendingHistory = new java.util.ArrayList<>();
+    private int visitCount = 0;
+
+    public void provideDetailedFeedback(String pizzaQuality, String serviceQuality, String deliveryQuality, String valueForMoney, String overallExperience, String wouldRecommend) {
+        System.out.println("Customer feedback received");
+        System.out.println("Pizza Quality: " + pizzaQuality);
+        System.out.println("Service Quality: " + serviceQuality);
+        System.out.println("Delivery Quality: " + deliveryQuality);
+        System.out.println("Value for Money: " + valueForMoney);
+        System.out.println("Overall Experience: " + overallExperience);
+        System.out.println("Would Recommend: " + wouldRecommend);
+        this.complain("Feedback submitted");
+    }
+
+    public void trackSpendingAndPreferences(String item1, double spent1, String item2, double spent2, String item3, double spent3) {
+        System.out.println("Tracking customer spending and preferences");
+        this.preferenceList.add(item1);
+        this.spendingHistory.add(spent1);
+        this.preferenceList.add(item2);
+        this.spendingHistory.add(spent2);
+        this.preferenceList.add(item3);
+        this.spendingHistory.add(spent3);
+        this.orderPizza(item1);
+        this.orderPizza(item2);
+        this.orderPizza(item3);
+        this.visitCount++;
+    }
+
+    public void analyzeCustomerBehavior() {
+        System.out.println("Analyzing customer behavior");
+        System.out.println("Customer: " + firstName + " " + lastName);
+        System.out.println("Total Visits: " + visitCount);
+        double totalSpending = 0;
+        for (Double spent : spendingHistory) {
+            totalSpending += spent;
+        }
+        System.out.println("Total Spending: " + totalSpending);
+        System.out.println("Average Spending: " + (spendingHistory.size() > 0 ? totalSpending / spendingHistory.size() : 0));
+        System.out.println("Preferences: ");
+        for (int i = 0; i < preferenceList.size(); i++) {
+            System.out.println("  " + (i+1) + ". " + preferenceList.get(i) + " - Spent: " + spendingHistory.get(i));
+        }
+    }
+
+    public void submitLongComplaintWithDetails(String mainIssue, String detail1, String detail2, String detail3, String detail4, String desiredResolution) {
+        System.out.println("Customer " + firstName + " submitting detailed complaint");
+        System.out.println("Main Issue: " + mainIssue);
+        System.out.println("Detail 1: " + detail1);
+        System.out.println("Detail 2: " + detail2);
+        System.out.println("Detail 3: " + detail3);
+        System.out.println("Detail 4: " + detail4);
+        System.out.println("Desired Resolution: " + desiredResolution);
+        this.complain(mainIssue);
+        this.complain(mainIssue);
+        this.complaintHistory.add(mainIssue);
+        this.complaintHistory.add(detail1);
+    }
 }
