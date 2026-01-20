@@ -379,4 +379,64 @@ public class Cashier {
             System.out.println("  " + auditLog.get(i));
         }
     }
+
+    private java.util.List<String> settlementRecords = new java.util.ArrayList<>();
+    private java.util.Map<String, Double> dailyTotals = new java.util.HashMap<>();
+
+    public void processEndOfDaySettlement(String settlementDate, double cashOnHand, double expectedAmount, double discrepancy, String discrepancyReason, boolean requiresApproval, String approverName) {
+        System.out.println("Processing End of Day Settlement for: " + settlementDate);
+        System.out.println("Cash On Hand: " + cashOnHand);
+        System.out.println("Expected Amount: " + expectedAmount);
+        System.out.println("Discrepancy: " + discrepancy);
+        System.out.println("Reason: " + discrepancyReason);
+        if (requiresApproval) {
+            System.out.println("Approval Required: " + approverName);
+        }
+        settlementRecords.add(settlementDate + ": " + discrepancy);
+        dailyTotals.put(settlementDate, cashOnHand);
+        System.out.println("Settlement record created");
+    }
+
+    public void handleSpecialPromotionsAndDiscounts(String promo1Code, double promo1Discount, int promo1MinPurchase, String promo2Code, double promo2Discount, int promo2MinPurchase, String promo3Code, double promo3Discount, int promo3MinPurchase, boolean stackable) {
+        System.out.println("Handling special promotions");
+        System.out.println("Promotion 1: " + promo1Code + " - " + promo1Discount + "% off (min: $" + promo1MinPurchase + ")");
+        System.out.println("Promotion 2: " + promo2Code + " - " + promo2Discount + "% off (min: $" + promo2MinPurchase + ")");
+        System.out.println("Promotion 3: " + promo3Code + " - " + promo3Discount + "% off (min: $" + promo3MinPurchase + ")");
+        System.out.println("Stackable: " + stackable);
+        if (stackable) {
+            double totalDiscount = promo1Discount + promo2Discount + promo3Discount;
+            System.out.println("Total Discount if Stacked: " + totalDiscount + "%");
+        }
+    }
+
+    public void validateAndProcessCashierBalance(String cashierId, double openingBalance, double totalSalesProcessed, double totalRefunds, double totalDiscounts, double expectedClosingBalance, boolean balanceMatches) {
+        System.out.println("Validating cashier balance for: " + cashierId);
+        System.out.println("Opening Balance: " + openingBalance);
+        System.out.println("Total Sales: " + totalSalesProcessed);
+        System.out.println("Total Refunds: " + totalRefunds);
+        System.out.println("Total Discounts: " + totalDiscounts);
+        double calculatedClosing = openingBalance + totalSalesProcessed - totalRefunds - totalDiscounts;
+        System.out.println("Expected Closing: " + expectedClosingBalance);
+        System.out.println("Calculated Closing: " + calculatedClosing);
+        System.out.println("Balance Matches: " + balanceMatches);
+        if (!balanceMatches) {
+            System.out.println("ALERT: Cashier balance discrepancy detected!");
+        }
+    }
+
+    public void executeComplexOrderBatch(String batch1Orders, String batch2Orders, String batch3Orders, String batch4Orders, boolean parallelProcessing, String priority, int timeoutSeconds) {
+        System.out.println("Executing complex order batch");
+        System.out.println("Batch 1: " + batch1Orders);
+        System.out.println("Batch 2: " + batch2Orders);
+        System.out.println("Batch 3: " + batch3Orders);
+        System.out.println("Batch 4: " + batch4Orders);
+        System.out.println("Parallel Processing: " + parallelProcessing);
+        System.out.println("Priority: " + priority);
+        System.out.println("Timeout: " + timeoutSeconds + " seconds");
+        this.takeOrder(batch1Orders);
+        this.takeOrder(batch2Orders);
+        this.takeOrder(batch3Orders);
+        this.takeOrder(batch4Orders);
+        System.out.println("Batch execution initiated");
+    }
 }

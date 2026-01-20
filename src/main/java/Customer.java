@@ -412,4 +412,74 @@ public class Customer {
         }
         System.out.println("Average Spending: $" + avgSpending);
     }
+
+    private java.util.Map<String, String> referralData = new java.util.HashMap<>();
+    private java.util.List<String> referralHistory = new java.util.ArrayList<>();
+
+    public void submitReferralAndTrackRewards(String referralsName1, String referralsEmail1, String referralsName2, String referralsEmail2, String referralsName3, String referralsEmail3, String referralCampaign) {
+        System.out.println("Submitting referrals for: " + firstName);
+        referralData.put(referralsName1, referralsEmail1);
+        referralData.put(referralsName2, referralsEmail2);
+        referralData.put(referralsName3, referralsEmail3);
+        referralHistory.add(referralsName1);
+        referralHistory.add(referralsName2);
+        referralHistory.add(referralsName3);
+        System.out.println("Referral 1: " + referralsName1 + " (" + referralsEmail1 + ")");
+        System.out.println("Referral 2: " + referralsName2 + " (" + referralsEmail2 + ")");
+        System.out.println("Referral 3: " + referralsName3 + " (" + referralsEmail3 + ")");
+        System.out.println("Campaign: " + referralCampaign);
+        this.loyaltyPoints += 25;
+        System.out.println("Referral bonus: 25 loyalty points awarded");
+    }
+
+    public void updatePrivacyAndDataSharingPreferences(boolean shareWithPartners, boolean shareWithAdvertisers, boolean allowAnalytics, boolean allowProfiling, boolean allowCrossMarketing, String dataRetentionPeriod, String gdprStatus) {
+        System.out.println("Updating privacy preferences for: " + firstName);
+        System.out.println("Share with Partners: " + shareWithPartners);
+        System.out.println("Share with Advertisers: " + shareWithAdvertisers);
+        System.out.println("Allow Analytics: " + allowAnalytics);
+        System.out.println("Allow Profiling: " + allowProfiling);
+        System.out.println("Allow Cross-Marketing: " + allowCrossMarketing);
+        System.out.println("Data Retention: " + dataRetentionPeriod);
+        System.out.println("GDPR Status: " + gdprStatus);
+        notificationPreferences.add("Privacy updated");
+        this.complain("Privacy settings changed");
+    }
+
+    public void initiateLoyaltyTierUpgradeProcess(String currentTier, String targetTier, int pointsRequired, int pointsHave, String eligibilityStatus, boolean qualifies, String nextBenefits) {
+        System.out.println("Initiating loyalty tier upgrade for: " + firstName);
+        System.out.println("Current Tier: " + currentTier);
+        System.out.println("Target Tier: " + targetTier);
+        System.out.println("Points Required: " + pointsRequired);
+        System.out.println("Points Have: " + pointsHave);
+        System.out.println("Eligibility: " + eligibilityStatus);
+        System.out.println("Qualifies: " + qualifies);
+        if (qualifies) {
+            System.out.println("Tier Upgrade Processing...");
+            System.out.println("New Benefits: " + nextBenefits);
+            this.loyaltyPoints = 0;
+        } else {
+            int pointsNeeded = pointsRequired - pointsHave;
+            System.out.println("Points needed for upgrade: " + pointsNeeded);
+        }
+    }
+
+    public void generateComprehensiveCustomerAnalyticsReport() {
+        System.out.println("\n=== Comprehensive Customer Analytics for " + firstName + " ===");
+        System.out.println("Customer ID: Generated from email hash");
+        System.out.println("Registration Date: Not stored");
+        System.out.println("Loyalty Points: " + loyaltyPoints);
+        System.out.println("Total Orders: " + orderHistory.size());
+        System.out.println("Total Complaints: " + complaintHistory.size());
+        System.out.println("Average Order Value: $" + (spendingHistory.size() > 0 ? spendingHistory.stream().mapToDouble(Double::doubleValue).average().orElse(0) : 0));
+        System.out.println("Referrals Made: " + referralHistory.size());
+        System.out.println("Subscription Plans: " + subscriptionPlans.size());
+        System.out.println("Communication Preferences:");
+        for (String pref : notificationPreferences) {
+            System.out.println("  - " + pref);
+        }
+        System.out.println("Behavior Profile: Generated from order patterns");
+        for (int i = 0; i < preferenceList.size(); i++) {
+            System.out.println("  Preference " + (i+1) + ": " + preferenceList.get(i));
+        }
+    }
 }
