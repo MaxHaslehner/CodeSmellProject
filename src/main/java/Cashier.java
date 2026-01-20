@@ -514,4 +514,73 @@ public class Cashier {
         System.out.println("Strategy: " + combinationStrategy);
         System.out.println("Original: $" + baseAmount + " -> Final: $" + finalAmount);
     }
+
+    private java.util.List<String> invoiceRecords = new java.util.ArrayList<>();
+    private java.util.Map<String, Double> customerCreditLimits = new java.util.HashMap<>();
+
+    public void generateAndSendInvoiceWithTaxCalculation(String invoiceId, String customerId, double subtotal, double taxRate, double shippingCost, double insuranceCost, String invoiceDate, String dueDate, String paymentTerms) {
+        System.out.println("Generating invoice: " + invoiceId);
+        System.out.println("Customer: " + customerId);
+        System.out.println("Subtotal: $" + subtotal);
+        double taxAmount = subtotal * (taxRate / 100.0);
+        System.out.println("Tax (" + taxRate + "%): $" + taxAmount);
+        System.out.println("Shipping: $" + shippingCost);
+        System.out.println("Insurance: $" + insuranceCost);
+        double total = subtotal + taxAmount + shippingCost + insuranceCost;
+        System.out.println("Total: $" + total);
+        System.out.println("Invoice Date: " + invoiceDate);
+        System.out.println("Due Date: " + dueDate);
+        System.out.println("Payment Terms: " + paymentTerms);
+        invoiceRecords.add(invoiceId + ": " + total);
+    }
+
+    public void validateCreditLimitAndAuthorizeTransaction(String customerId, double transactionAmount, double currentCreditBalance, double creditLimit, String creditRating, boolean automaticApproval, String manualReviewRequired) {
+        System.out.println("Validating credit limit for: " + customerId);
+        System.out.println("Transaction Amount: $" + transactionAmount);
+        System.out.println("Current Credit Balance: $" + currentCreditBalance);
+        System.out.println("Credit Limit: $" + creditLimit);
+        System.out.println("Credit Rating: " + creditRating);
+        double availableCredit = creditLimit - currentCreditBalance;
+        System.out.println("Available Credit: $" + availableCredit);
+        customerCreditLimits.put(customerId, availableCredit);
+        if (automaticApproval) {
+            System.out.println("Transaction APPROVED");
+            this.processPayment(transactionAmount, customerId, "", "");
+        } else {
+            System.out.println("Manual Review Required: " + manualReviewRequired);
+        }
+    }
+
+    public void processVolumeDiscountTiering(String tierId, int orderQuantity, double unitPrice, double tier1Threshold, double tier1Discount, double tier2Threshold, double tier2Discount, double tier3Threshold, double tier3Discount) {
+        System.out.println("Processing volume discount tier: " + tierId);
+        System.out.println("Order Quantity: " + orderQuantity);
+        System.out.println("Unit Price: $" + unitPrice);
+        double totalPrice = orderQuantity * unitPrice;
+        System.out.println("Subtotal: $" + totalPrice);
+        if (orderQuantity >= tier3Threshold) {
+            totalPrice = totalPrice * (1 - tier3Discount / 100.0);
+            System.out.println("Tier 3 Discount Applied: " + tier3Discount + "%");
+        } else if (orderQuantity >= tier2Threshold) {
+            totalPrice = totalPrice * (1 - tier2Discount / 100.0);
+            System.out.println("Tier 2 Discount Applied: " + tier2Discount + "%");
+        } else if (orderQuantity >= tier1Threshold) {
+            totalPrice = totalPrice * (1 - tier1Discount / 100.0);
+            System.out.println("Tier 1 Discount Applied: " + tier1Discount + "%");
+        }
+        System.out.println("Final Total: $" + totalPrice);
+    }
+
+    public void auditAndReconcileMultiplePaymentMethods(String method1, double amount1, String method2, double amount2, String method3, double amount3, String reconciliationDate, boolean balanced) {
+        System.out.println("Auditing payment methods for: " + reconciliationDate);
+        System.out.println("Method 1 (" + method1 + "): $" + amount1);
+        System.out.println("Method 2 (" + method2 + "): $" + amount2);
+        System.out.println("Method 3 (" + method3 + "): $" + amount3);
+        double totalAmount = amount1 + amount2 + amount3;
+        System.out.println("Total Amount: $" + totalAmount);
+        System.out.println("Balanced: " + balanced);
+        if (!balanced) {
+            System.out.println("ALERT: Payment reconciliation discrepancy detected!");
+        }
+        auditLog.add("Reconciliation: " + reconciliationDate + " - " + totalAmount);
+    }
 }

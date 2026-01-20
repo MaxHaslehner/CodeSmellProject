@@ -563,4 +563,83 @@ public class Customer {
             System.out.println("  " + key + ": " + customizationOptions.get(key));
         }
     }
+
+    private java.util.Map<String, String> accountSettings = new java.util.HashMap<>();
+    private java.util.List<String> securityEvents = new java.util.ArrayList<>();
+
+    public void configureAdvancedAccountSecuritySettings(String passwordPolicy, String twoFactorMethod, boolean biometricEnabled, String securityQuestion1, String securityAnswer1, String securityQuestion2, String securityAnswer2, String deviceFingerprint) {
+        System.out.println("Configuring advanced security for: " + firstName);
+        accountSettings.put("PasswordPolicy", passwordPolicy);
+        accountSettings.put("2FAMethod", twoFactorMethod);
+        accountSettings.put("Biometric", String.valueOf(biometricEnabled));
+        accountSettings.put("SecurityQ1", securityQuestion1);
+        accountSettings.put("DeviceFingerprint", deviceFingerprint);
+        System.out.println("Password Policy: " + passwordPolicy);
+        System.out.println("2FA Method: " + twoFactorMethod);
+        System.out.println("Biometric Enabled: " + biometricEnabled);
+        System.out.println("Security Q1: " + securityQuestion1);
+        System.out.println("Security Q2: " + securityQuestion2);
+        System.out.println("Device Fingerprint: " + deviceFingerprint);
+        securityEvents.add("Security config updated");
+    }
+
+    public void submitComprehensiveProductFeedbackSurvey(String product1, int rating1, String feedback1, String product2, int rating2, String feedback2, String product3, int rating3, String feedback3, String overallComment) {
+        System.out.println("Product Feedback Survey from: " + firstName);
+        System.out.println("Product 1: " + product1 + " - Rating: " + rating1);
+        System.out.println("Feedback: " + feedback1);
+        System.out.println("Product 2: " + product2 + " - Rating: " + rating2);
+        System.out.println("Feedback: " + feedback2);
+        System.out.println("Product 3: " + product3 + " - Rating: " + rating3);
+        System.out.println("Feedback: " + feedback3);
+        System.out.println("Overall: " + overallComment);
+        ratingHistory.put(product1, rating1);
+        ratingHistory.put(product2, rating2);
+        ratingHistory.put(product3, rating3);
+        reviewNotes.add(feedback1);
+        reviewNotes.add(feedback2);
+        reviewNotes.add(feedback3);
+    }
+
+    public void trackWishlistAndNotifyOnAvailability(String item1, double price1, String item2, double price2, String item3, double price3, String item4, double price4, boolean priceDropNotification, boolean stockNotification) {
+        System.out.println("Tracking wishlist for: " + firstName);
+        preferenceList.add(item1);
+        spendingHistory.add(price1);
+        preferenceList.add(item2);
+        spendingHistory.add(price2);
+        preferenceList.add(item3);
+        spendingHistory.add(price3);
+        preferenceList.add(item4);
+        spendingHistory.add(price4);
+        System.out.println("Item 1: " + item1 + " - $" + price1);
+        System.out.println("Item 2: " + item2 + " - $" + price2);
+        System.out.println("Item 3: " + item3 + " - $" + price3);
+        System.out.println("Item 4: " + item4 + " - $" + price4);
+        System.out.println("Price Drop Notification: " + priceDropNotification);
+        System.out.println("Stock Notification: " + stockNotification);
+        notificationPreferences.add("Price Drop: " + priceDropNotification);
+        notificationPreferences.add("Stock: " + stockNotification);
+    }
+
+    public void generateDetailedMarketingPreferenceProfile() {
+        System.out.println("\n=== Marketing Preference Profile ===");
+        System.out.println("Customer: " + firstName + " " + lastName);
+        System.out.println("Account Settings: " + accountSettings.size() + " items");
+        for (String key : accountSettings.keySet()) {
+            System.out.println("  " + key + ": " + accountSettings.get(key));
+        }
+        System.out.println("Security Events: " + securityEvents.size());
+        for (String event : securityEvents) {
+            System.out.println("  - " + event);
+        }
+        System.out.println("Wishlist Items: " + preferenceList.size());
+        for (int i = 0; i < preferenceList.size(); i++) {
+            if (i < spendingHistory.size()) {
+                System.out.println("  " + (i+1) + ". " + preferenceList.get(i) + " ($" + spendingHistory.get(i) + ")");
+            }
+        }
+        System.out.println("Product Ratings: " + ratingHistory.size());
+        System.out.println("Subscriptions Active: " + subscriptionPlans.size());
+        System.out.println("Total Review Notes: " + reviewNotes.size());
+        System.out.println("Notification Preferences: " + notificationPreferences.size());
+    }
 }
