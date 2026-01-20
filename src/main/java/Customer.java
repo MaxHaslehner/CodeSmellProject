@@ -720,4 +720,76 @@ public class Customer {
         System.out.println("Order Customizations: " + orderCustomizations.size());
         System.out.println("Review Notes: " + reviewNotes.size());
     }
+
+    private java.util.List<String> giftRegistry = new java.util.ArrayList<>();
+    private java.util.Map<String, String> specialOccasions = new java.util.HashMap<>();
+
+    public void createAndManageGiftRegistry(String registryName, String occasion, String occasionDate, String guestList, String registryDescription, int estimatedGuests, String shippingPreference, String giftReturnPolicy) {
+        System.out.println("Creating gift registry for: " + firstName);
+        System.out.println("Registry Name: " + registryName);
+        System.out.println("Occasion: " + occasion);
+        System.out.println("Occasion Date: " + occasionDate);
+        System.out.println("Guest List: " + guestList);
+        System.out.println("Description: " + registryDescription);
+        System.out.println("Estimated Guests: " + estimatedGuests);
+        System.out.println("Shipping Preference: " + shippingPreference);
+        System.out.println("Return Policy: " + giftReturnPolicy);
+        specialOccasions.put(occasion, occasionDate);
+        giftRegistry.add(registryName);
+        giftRegistry.add(occasion);
+    }
+
+    public void processBulkPreOrdersWithScheduling(String order1Item, int order1Qty, String order1Date, String order2Item, int order2Qty, String order2Date, String order3Item, int order3Qty, String order3Date, String fulfillmentPriority) {
+        System.out.println("Processing bulk pre-orders for: " + firstName);
+        System.out.println("Order 1: " + order1Qty + "x " + order1Item + " scheduled for " + order1Date);
+        System.out.println("Order 2: " + order2Qty + "x " + order2Item + " scheduled for " + order2Date);
+        System.out.println("Order 3: " + order3Qty + "x " + order3Item + " scheduled for " + order3Date);
+        System.out.println("Fulfillment Priority: " + fulfillmentPriority);
+        orderHistory.add(order1Item + ":" + order1Qty);
+        orderHistory.add(order2Item + ":" + order2Qty);
+        orderHistory.add(order3Item + ":" + order3Qty);
+        this.orderPizza(order1Item);
+        this.orderPizza(order2Item);
+        this.orderPizza(order3Item);
+    }
+
+    public void configureAdvancedSocialSharingOptions(String facebookSharing, String instagramSharing, String twitterSharing, String linkedinSharing, String tiktokSharing, String pinterestSharing, boolean autoShare, String shareMessage) {
+        System.out.println("Configuring social sharing for: " + firstName);
+        System.out.println("Facebook: " + facebookSharing);
+        System.out.println("Instagram: " + instagramSharing);
+        System.out.println("Twitter: " + twitterSharing);
+        System.out.println("LinkedIn: " + linkedinSharing);
+        System.out.println("TikTok: " + tiktokSharing);
+        System.out.println("Pinterest: " + pinterestSharing);
+        System.out.println("Auto-Share: " + autoShare);
+        System.out.println("Share Message: " + shareMessage);
+        accountSettings.put("FB", facebookSharing);
+        accountSettings.put("IG", instagramSharing);
+        accountSettings.put("TW", twitterSharing);
+        accountSettings.put("LI", linkedinSharing);
+        accountSettings.put("TK", tiktokSharing);
+        accountSettings.put("PIN", pinterestSharing);
+        notificationPreferences.add("Social sharing configured");
+    }
+
+    public void generatePredictiveAnalyticsAndInsights() {
+        System.out.println("\n=== Predictive Analytics & Insights ===");
+        System.out.println("Customer: " + firstName + " " + lastName);
+        System.out.println("Predictive Models Generated");
+        double avgSpend = 0;
+        if (spendingHistory.size() > 0) {
+            avgSpend = spendingHistory.stream().mapToDouble(Double::doubleValue).average().orElse(0);
+        }
+        System.out.println("Average Spend: $" + avgSpend);
+        System.out.println("Predicted Annual Value: $" + (avgSpend * 12));
+        System.out.println("Churn Risk: " + (complaintHistory.size() > 5 ? "HIGH" : "LOW"));
+        System.out.println("Lifetime Value Score: " + (loyaltyPoints / 10.0));
+        System.out.println("Recommended Products: ");
+        for (int i = 0; i < Math.min(3, preferenceList.size()); i++) {
+            System.out.println("  " + (i+1) + ". " + preferenceList.get(i));
+        }
+        System.out.println("Gift Registry Items: " + giftRegistry.size());
+        System.out.println("Special Occasions: " + specialOccasions.size());
+        System.out.println("Engagement Level: " + (loginActivity.size() > 10 ? "HIGH" : "MEDIUM"));
+    }
 }

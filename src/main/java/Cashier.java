@@ -650,4 +650,69 @@ public class Cashier {
         System.out.println("Supervisor: " + supervisor);
         auditTrail.add("Session " + sessionId + " started by " + cashierId);
     }
+
+    private java.util.List<String> performanceMetrics = new java.util.ArrayList<>();
+    private java.util.Map<String, Double> kpiTracker = new java.util.HashMap<>();
+
+    public void analyzeAndReportKPIsForPeriod(String period, double transactionVolume, double errorRate, double customerSatisfaction, double avgProcessingTime, double conversionRate, double returnRate, String performanceStatus, String recommendedActions) {
+        System.out.println("KPI Analysis for: " + period);
+        System.out.println("Transaction Volume: " + transactionVolume);
+        System.out.println("Error Rate: " + errorRate + "%");
+        System.out.println("Customer Satisfaction: " + customerSatisfaction + "%");
+        System.out.println("Avg Processing Time: " + avgProcessingTime + "ms");
+        System.out.println("Conversion Rate: " + conversionRate + "%");
+        System.out.println("Return Rate: " + returnRate + "%");
+        kpiTracker.put("TransactionVolume", transactionVolume);
+        kpiTracker.put("ErrorRate", errorRate);
+        kpiTracker.put("Satisfaction", customerSatisfaction);
+        performanceMetrics.add("Period: " + period + " - Status: " + performanceStatus);
+        System.out.println("Performance Status: " + performanceStatus);
+        System.out.println("Recommendations: " + recommendedActions);
+    }
+
+    public void processMultiCurrencyTransactionsWithExchange(String currency1Code, double currency1Amount, double exchangeRate1, String currency2Code, double currency2Amount, double exchangeRate2, String baseCurrency, String settlementDate) {
+        System.out.println("Processing multi-currency transactions");
+        System.out.println("Currency 1: " + currency1Code + " - Amount: " + currency1Amount);
+        double converted1 = currency1Amount * exchangeRate1;
+        System.out.println("Converted: " + converted1 + " " + baseCurrency);
+        System.out.println("Currency 2: " + currency2Code + " - Amount: " + currency2Amount);
+        double converted2 = currency2Amount * exchangeRate2;
+        System.out.println("Converted: " + converted2 + " " + baseCurrency);
+        double totalInBase = converted1 + converted2;
+        System.out.println("Total in " + baseCurrency + ": " + totalInBase);
+        System.out.println("Settlement Date: " + settlementDate);
+        this.processPayment(totalInBase, baseCurrency, "", "");
+    }
+
+    public void initiateBulkCustomerNotificationCampaign(String campaignId, String messageTemplate, String targetSegment, int targetCount, String sendTime, boolean includePromo, String promoCode, double promoDiscount, String communicationChannel) {
+        System.out.println("Initiating notification campaign: " + campaignId);
+        System.out.println("Message: " + messageTemplate);
+        System.out.println("Target Segment: " + targetSegment);
+        System.out.println("Target Count: " + targetCount);
+        System.out.println("Send Time: " + sendTime);
+        System.out.println("Include Promo: " + includePromo);
+        if (includePromo) {
+            System.out.println("Promo Code: " + promoCode);
+            System.out.println("Discount: " + promoDiscount + "%");
+        }
+        System.out.println("Channel: " + communicationChannel);
+        performanceMetrics.add("Campaign " + campaignId + " initiated");
+    }
+
+    public void generateDetailedFinancialStatement(String fiscalPeriod, double revenue, double costOfGoods, double operatingExpenses, double taxExpense, double netIncome, double assetsTotal, double liabilitiesTotal, double equityTotal, String auditStatus) {
+        System.out.println("\n=== Financial Statement for " + fiscalPeriod + " ===");
+        System.out.println("Revenue: $" + revenue);
+        System.out.println("Cost of Goods: $" + costOfGoods);
+        double grossProfit = revenue - costOfGoods;
+        System.out.println("Gross Profit: $" + grossProfit);
+        System.out.println("Operating Expenses: $" + operatingExpenses);
+        double operatingIncome = grossProfit - operatingExpenses;
+        System.out.println("Operating Income: $" + operatingIncome);
+        System.out.println("Tax Expense: $" + taxExpense);
+        System.out.println("Net Income: $" + netIncome);
+        System.out.println("Total Assets: $" + assetsTotal);
+        System.out.println("Total Liabilities: $" + liabilitiesTotal);
+        System.out.println("Total Equity: $" + equityTotal);
+        System.out.println("Audit Status: " + auditStatus);
+    }
 }
