@@ -347,4 +347,69 @@ public class Customer {
             System.out.println("  - " + plan);
         }
     }
+
+    private java.util.List<String> notificationPreferences = new java.util.ArrayList<>();
+    private java.util.Map<String, Boolean> communicationChannels = new java.util.HashMap<>();
+
+    public void configureNotificationSettings(boolean emailNotifications, boolean smsNotifications, boolean pushNotifications, boolean phoneNotifications, String notificationFrequency, String quietHoursStart, String quietHoursEnd) {
+        System.out.println("Configuring notification settings for: " + firstName);
+        communicationChannels.put("Email", emailNotifications);
+        communicationChannels.put("SMS", smsNotifications);
+        communicationChannels.put("Push", pushNotifications);
+        communicationChannels.put("Phone", phoneNotifications);
+        System.out.println("Email Notifications: " + emailNotifications);
+        System.out.println("SMS Notifications: " + smsNotifications);
+        System.out.println("Push Notifications: " + pushNotifications);
+        System.out.println("Phone Notifications: " + phoneNotifications);
+        System.out.println("Notification Frequency: " + notificationFrequency);
+        System.out.println("Quiet Hours: " + quietHoursStart + " - " + quietHoursEnd);
+        notificationPreferences.add("Frequency: " + notificationFrequency);
+        notificationPreferences.add("Quiet: " + quietHoursStart + "-" + quietHoursEnd);
+    }
+
+    public void submitDetailedProductReview(String productName, int rating, String reviewText, String pros, String cons, boolean wouldRecommend, String reviewTitle) {
+        System.out.println("Product Review Submission for: " + firstName);
+        System.out.println("Product: " + productName);
+        System.out.println("Rating: " + rating);
+        System.out.println("Review Title: " + reviewTitle);
+        System.out.println("Review Text: " + reviewText);
+        System.out.println("Pros: " + pros);
+        System.out.println("Cons: " + cons);
+        System.out.println("Would Recommend: " + wouldRecommend);
+        this.complain(productName);
+        this.complain(productName);
+        reviewNotes.add(productName + ": " + reviewTitle);
+        reviewNotes.add("Rating: " + rating);
+        ratingHistory.put(productName, rating);
+    }
+
+    public void generateBehavioralInsightsReport() {
+        System.out.println("\n=== Behavioral Insights for " + firstName + " ===");
+        System.out.println("Total Loyalty Points: " + loyaltyPoints);
+        System.out.println("Total Orders: " + orderHistory.size());
+        System.out.println("Total Complaints: " + complaintHistory.size());
+        System.out.println("Communication Channels Enabled:");
+        for (String channel : communicationChannels.keySet()) {
+            System.out.println("  " + channel + ": " + communicationChannels.get(channel));
+        }
+        System.out.println("Notification Preferences: " + notificationPreferences.size());
+        for (String pref : notificationPreferences) {
+            System.out.println("  - " + pref);
+        }
+        System.out.println("Preferences: " + preferenceList.size());
+        for (int i = 0; i < preferenceList.size(); i++) {
+            if (i < spendingHistory.size()) {
+                System.out.println("  " + (i+1) + ". " + preferenceList.get(i) + " ($" + spendingHistory.get(i) + ")");
+            }
+        }
+        double avgSpending = 0;
+        if (spendingHistory.size() > 0) {
+            double totalSpending = 0;
+            for (Double spent : spendingHistory) {
+                totalSpending += spent;
+            }
+            avgSpending = totalSpending / spendingHistory.size();
+        }
+        System.out.println("Average Spending: $" + avgSpending);
+    }
 }

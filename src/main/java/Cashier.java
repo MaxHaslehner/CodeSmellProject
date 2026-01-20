@@ -331,4 +331,52 @@ public class Cashier {
         System.out.println("Closing Balance: " + closingBalance);
         System.out.println("Account reconciliation complete");
     }
+
+    private java.util.List<String> auditLog = new java.util.ArrayList<>();
+    private java.util.Map<String, Integer> suspiciousActivityCount = new java.util.HashMap<>();
+
+    public void flagAndInvestigateSuspiciousActivity(String customerId, String activityType, String description, double amount, boolean isHighRisk, String investigationStatus) {
+        System.out.println("Flagging suspicious activity for: " + customerId);
+        System.out.println("Activity Type: " + activityType);
+        System.out.println("Description: " + description);
+        System.out.println("Amount: " + amount);
+        System.out.println("High Risk: " + isHighRisk);
+        auditLog.add(customerId + ": " + activityType + " - " + description);
+        if (suspiciousActivityCount.containsKey(customerId)) {
+            int count = suspiciousActivityCount.get(customerId);
+            suspiciousActivityCount.put(customerId, count + 1);
+        } else {
+            suspiciousActivityCount.put(customerId, 1);
+        }
+        System.out.println("Investigation Status: " + investigationStatus);
+        if (isHighRisk) {
+            System.out.println("ALERT: High risk activity detected - blocking transaction");
+        }
+    }
+
+    public void processMultipleRefundsWithReason(String cust1RefundId, double cust1Amount, String cust1Reason, String cust2RefundId, double cust2Amount, String cust2Reason, String cust3RefundId, double cust3Amount, String cust3Reason) {
+        System.out.println("Processing multiple refunds");
+        this.processRefund(cust1Amount, cust1RefundId, cust1Reason, "Pending", "Processor");
+        this.processRefund(cust2Amount, cust2RefundId, cust2Reason, "Pending", "Processor");
+        this.processRefund(cust3Amount, cust3RefundId, cust3Reason, "Pending", "Processor");
+        System.out.println("All refunds submitted for processing");
+    }
+
+    public void generateMonthlyPerformanceReport(int month, int year, double targetRevenue, double actualRevenue, int targetTransactions, int actualTransactions, String performanceRating) {
+        System.out.println("\n=== Monthly Performance Report ===");
+        System.out.println("Month: " + month + "/" + year);
+        System.out.println("Target Revenue: " + targetRevenue);
+        System.out.println("Actual Revenue: " + actualRevenue);
+        double revenueVariance = actualRevenue - targetRevenue;
+        System.out.println("Revenue Variance: " + revenueVariance);
+        System.out.println("Target Transactions: " + targetTransactions);
+        System.out.println("Actual Transactions: " + actualTransactions);
+        int transactionVariance = actualTransactions - targetTransactions;
+        System.out.println("Transaction Variance: " + transactionVariance);
+        System.out.println("Performance Rating: " + performanceRating);
+        System.out.println("Audit Log Entries: " + auditLog.size());
+        for (int i = 0; i < Math.min(5, auditLog.size()); i++) {
+            System.out.println("  " + auditLog.get(i));
+        }
+    }
 }
