@@ -776,4 +776,58 @@ public class Cashier {
         double totalVolume = vendor1Volume + vendor2Volume + vendor3Volume;
         System.out.println("Total Vendor Volume: " + totalVolume);
     }
+
+    private java.util.Map<String, String> languageSettings = new java.util.HashMap<>();
+    private java.util.List<String> communicationLog = new java.util.ArrayList<>();
+
+    public void executeGlobalMultiLanguageSupportConfiguration(String languagePreference1, String languagePreference2, String languagePreference3, String currencyCode, String timeZone, boolean useLocalPaymentMethods, String localTaxCompliance, String regionRestrictions) {
+        System.out.println("Configuring multi-language support");
+        languageSettings.put("Primary", languagePreference1);
+        languageSettings.put("Secondary", languagePreference2);
+        languageSettings.put("Tertiary", languagePreference3);
+        languageSettings.put("Currency", currencyCode);
+        languageSettings.put("TimeZone", timeZone);
+        System.out.println("Language 1: " + languagePreference1);
+        System.out.println("Language 2: " + languagePreference2);
+        System.out.println("Language 3: " + languagePreference3);
+        System.out.println("Currency: " + currencyCode);
+        System.out.println("TimeZone: " + timeZone);
+        System.out.println("Local Payment Methods: " + useLocalPaymentMethods);
+        System.out.println("Tax Compliance: " + localTaxCompliance);
+        System.out.println("Region Restrictions: " + regionRestrictions);
+        communicationLog.add("Language config: " + languagePreference1);
+    }
+
+    public void processComplexLoyaltyPointsRedeemedWithTiers(String customerId, int pointsRedeemed, String tier1Reward, int tier1Points, String tier2Reward, int tier2Points, String tier3Reward, int tier3Points, boolean expeditedProcessing) {
+        System.out.println("Processing loyalty redemption for: " + customerId);
+        System.out.println("Points Redeemed: " + pointsRedeemed);
+        System.out.println("Tier 1: " + tier1Reward + " (" + tier1Points + " points)");
+        System.out.println("Tier 2: " + tier2Reward + " (" + tier2Points + " points)");
+        System.out.println("Tier 3: " + tier3Reward + " (" + tier3Points + " points)");
+        if (pointsRedeemed >= tier3Points) {
+            System.out.println("Tier 3 reward eligible: " + tier3Reward);
+        } else if (pointsRedeemed >= tier2Points) {
+            System.out.println("Tier 2 reward eligible: " + tier2Reward);
+        } else if (pointsRedeemed >= tier1Points) {
+            System.out.println("Tier 1 reward eligible: " + tier1Reward);
+        }
+        System.out.println("Expedited Processing: " + expeditedProcessing);
+        communicationLog.add("Redemption: " + customerId + " - " + pointsRedeemed + " points");
+    }
+
+    public void generateFinalizedTransactionSummaryReport(String reportId, String reportDate, int totalTransactionsProcessed, double totalVolumeProcessed, double averageTransactionSize, int failedTransactions, double failureRate, String systemStatus, String performanceRating, String auditNotes) {
+        System.out.println("\n=== Final Transaction Summary Report ===");
+        System.out.println("Report ID: " + reportId);
+        System.out.println("Date: " + reportDate);
+        System.out.println("Total Transactions: " + totalTransactionsProcessed);
+        System.out.println("Total Volume: $" + totalVolumeProcessed);
+        System.out.println("Average Transaction: $" + averageTransactionSize);
+        System.out.println("Failed Transactions: " + failedTransactions);
+        System.out.println("Failure Rate: " + failureRate + "%");
+        System.out.println("System Status: " + systemStatus);
+        System.out.println("Performance Rating: " + performanceRating);
+        System.out.println("Audit Notes: " + auditNotes);
+        performanceMetrics.add("Report: " + reportId);
+        performanceMetrics.add("Transactions: " + totalTransactionsProcessed);
+    }
 }

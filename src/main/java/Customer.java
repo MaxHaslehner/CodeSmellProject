@@ -866,4 +866,69 @@ public class Customer {
             System.out.println("  " + (i+1) + ". " + preferenceList.get(i));
         }
     }
+
+    private java.util.Map<String, String> emergencyContactInfo = new java.util.HashMap<>();
+    private java.util.List<String> dependentsList = new java.util.ArrayList<>();
+
+    public void updateEmergencyContactsAndDependents(String emergencyName1, String emergencyPhone1, String emergencyRelation1, String emergencyName2, String emergencyPhone2, String emergencyRelation2, String dependent1Name, int dependent1Age, String dependent2Name, int dependent2Age) {
+        System.out.println("Updating emergency contacts for: " + firstName);
+        emergencyContactInfo.put("Name1", emergencyName1);
+        emergencyContactInfo.put("Phone1", emergencyPhone1);
+        emergencyContactInfo.put("Relation1", emergencyRelation1);
+        emergencyContactInfo.put("Name2", emergencyName2);
+        emergencyContactInfo.put("Phone2", emergencyPhone2);
+        emergencyContactInfo.put("Relation2", emergencyRelation2);
+        System.out.println("Emergency Contact 1: " + emergencyName1 + " (" + emergencyRelation1 + ") - " + emergencyPhone1);
+        System.out.println("Emergency Contact 2: " + emergencyName2 + " (" + emergencyRelation2 + ") - " + emergencyPhone2);
+        dependentsList.add(dependent1Name + " - Age: " + dependent1Age);
+        dependentsList.add(dependent2Name + " - Age: " + dependent2Age);
+        System.out.println("Dependent 1: " + dependent1Name + " (Age " + dependent1Age + ")");
+        System.out.println("Dependent 2: " + dependent2Name + " (Age " + dependent2Age + ")");
+    }
+
+    public void processComplexCustomerLoyaltyMigration(String migrationType, String sourceProgram, String targetProgram, int sourcePoints, double conversionRate, boolean transferLocked, String lockupPeriod, String migrationFee, boolean processImmediately) {
+        System.out.println("Processing loyalty migration for: " + firstName);
+        System.out.println("Migration Type: " + migrationType);
+        System.out.println("Source Program: " + sourceProgram);
+        System.out.println("Target Program: " + targetProgram);
+        System.out.println("Source Points: " + sourcePoints);
+        int convertedPoints = (int)(sourcePoints * conversionRate);
+        System.out.println("Converted Points: " + convertedPoints);
+        System.out.println("Transfer Locked: " + transferLocked);
+        if (transferLocked) {
+            System.out.println("Lockup Period: " + lockupPeriod);
+        }
+        System.out.println("Migration Fee: " + migrationFee);
+        System.out.println("Process Immediately: " + processImmediately);
+        if (processImmediately) {
+            loyaltyPoints = convertedPoints;
+            System.out.println("Migration completed");
+        }
+    }
+
+    public void generateFinalizedCustormerInsightReport() {
+        System.out.println("\n=== Finalized Customer Insight Report ===");
+        System.out.println("Customer Name: " + firstName + " " + lastName);
+        System.out.println("Email: " + email);
+        System.out.println("Phone: " + phoneNumber);
+        System.out.println("Address: " + address);
+        System.out.println("Loyalty Status: " + (loyaltyPoints > 500 ? "VIP" : "Standard"));
+        System.out.println("Total Loyalty Points: " + loyaltyPoints);
+        System.out.println("Lifetime Value: $" + spendingHistory.stream().mapToDouble(Double::doubleValue).sum());
+        System.out.println("Total Orders: " + orderHistory.size());
+        System.out.println("Emergency Contacts: " + emergencyContactInfo.size());
+        for (String key : emergencyContactInfo.keySet()) {
+            System.out.println("  " + key + ": " + emergencyContactInfo.get(key));
+        }
+        System.out.println("Dependents: " + dependentsList.size());
+        for (String dependent : dependentsList) {
+            System.out.println("  - " + dependent);
+        }
+        System.out.println("Active Subscriptions: " + subscriptionPlans.size());
+        System.out.println("Total Preferences: " + preferenceList.size());
+        System.out.println("Communication Preferences Configured: " + communicationChannels.size());
+        System.out.println("Health Preferences: " + healthAndWellnessPreferences.size());
+        System.out.println("Device Profiles: " + deviceInformation.size());
+        System.out.println("Account Settings: " + accountSettings.size());
+    }
 }
