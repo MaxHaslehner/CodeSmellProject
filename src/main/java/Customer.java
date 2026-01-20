@@ -313,4 +313,38 @@ public class Customer {
         System.out.println("Complaint History: " + complaintHistory.size() + " complaints");
         System.out.println("Review Notes: " + reviewNotes.size() + " notes");
     }
+
+    private java.util.Map<String, Double> subscriptionPlans = new java.util.HashMap<>();
+    private java.util.List<String> subscriptionHistory = new java.util.ArrayList<>();
+
+    public void enrollInSubscriptionPlans(String plan1, double cost1, String plan2, double cost2, String plan3, double cost3, boolean autoRenew) {
+        System.out.println("Enrolling customer " + firstName + " in subscription plans");
+        subscriptionPlans.put(plan1, cost1);
+        subscriptionPlans.put(plan2, cost2);
+        subscriptionPlans.put(plan3, cost3);
+        subscriptionHistory.add(plan1);
+        subscriptionHistory.add(plan2);
+        subscriptionHistory.add(plan3);
+        System.out.println("Plan 1: " + plan1 + " - Cost: " + cost1);
+        System.out.println("Plan 2: " + plan2 + " - Cost: " + cost2);
+        System.out.println("Plan 3: " + plan3 + " - Cost: " + cost3);
+        System.out.println("Auto-Renew: " + autoRenew);
+        this.loyaltyPoints += 50;
+    }
+
+    public void analyzeSubscriptionUsageAndValue(String timeframe, String mostUsedFeature, String leastUsedFeature, boolean isActive) {
+        System.out.println("Analyzing subscription usage for: " + firstName);
+        System.out.println("Timeframe: " + timeframe);
+        System.out.println("Most Used Feature: " + mostUsedFeature);
+        System.out.println("Least Used Feature: " + leastUsedFeature);
+        System.out.println("Subscription Active: " + isActive);
+        double totalSubscriptionCost = 0;
+        for (Double cost : subscriptionPlans.values()) {
+            totalSubscriptionCost += cost;
+        }
+        System.out.println("Total Subscription Cost: " + totalSubscriptionCost);
+        for (String plan : subscriptionHistory) {
+            System.out.println("  - " + plan);
+        }
+    }
 }

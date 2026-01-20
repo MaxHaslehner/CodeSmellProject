@@ -299,4 +299,36 @@ public class Cashier {
             System.out.println("Customer not found");
         }
     }
+
+    private java.util.List<String> pendingOrders = new java.util.ArrayList<>();
+    private java.util.Map<String, String> orderStatuses = new java.util.HashMap<>();
+
+    public void managePendingOrdersWithPriority(String order1, String priority1, String order2, String priority2, String order3, String priority3, boolean expedited) {
+        System.out.println("Managing pending orders with priority");
+        pendingOrders.add(order1);
+        orderStatuses.put(order1, priority1);
+        pendingOrders.add(order2);
+        orderStatuses.put(order2, priority2);
+        pendingOrders.add(order3);
+        orderStatuses.put(order3, priority3);
+        System.out.println("Order 1: " + order1 + " - Priority: " + priority1);
+        System.out.println("Order 2: " + order2 + " - Priority: " + priority2);
+        System.out.println("Order 3: " + order3 + " - Priority: " + priority3);
+        if (expedited) {
+            System.out.println("Expedited processing enabled");
+            this.takeOrder("Expedited");
+        }
+    }
+
+    public void reconcileAccountsAndGenerateStatement(String accountId, double openingBalance, double deposits, double withdrawals, double fees, String statementPeriod) {
+        System.out.println("Reconciling account: " + accountId);
+        System.out.println("Statement Period: " + statementPeriod);
+        System.out.println("Opening Balance: " + openingBalance);
+        System.out.println("Deposits: " + deposits);
+        System.out.println("Withdrawals: " + withdrawals);
+        System.out.println("Fees: " + fees);
+        double closingBalance = openingBalance + deposits - withdrawals - fees;
+        System.out.println("Closing Balance: " + closingBalance);
+        System.out.println("Account reconciliation complete");
+    }
 }

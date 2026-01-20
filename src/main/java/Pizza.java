@@ -177,6 +177,37 @@ class CheesePizza extends Pizza {
         super("Medium", "Regular", "Cheese");
     }
 
+    private java.util.List<String> preparationSteps = new java.util.ArrayList<>();
+    private int prepTime = 0;
+
+    public void recordDetailedPreparation(String step1, String step2, String step3, String step4, String step5, int estimatedTime) {
+        System.out.println("Recording detailed preparation for CheesePizza");
+        preparationSteps.add(step1);
+        preparationSteps.add(step2);
+        preparationSteps.add(step3);
+        preparationSteps.add(step4);
+        preparationSteps.add(step5);
+        prepTime = estimatedTime;
+        System.out.println("Step 1: " + step1);
+        System.out.println("Step 2: " + step2);
+        System.out.println("Step 3: " + step3);
+        System.out.println("Step 4: " + step4);
+        System.out.println("Step 5: " + step5);
+        System.out.println("Estimated Prep Time: " + estimatedTime + " minutes");
+    }
+
+    public void validateAndLogQualityMetrics(String appearance, String texture, String flavor, String temperature, String packaging) {
+        System.out.println("Quality Metrics for CheesePizza:");
+        System.out.println("Appearance: " + appearance);
+        System.out.println("Texture: " + texture);
+        System.out.println("Flavor: " + flavor);
+        System.out.println("Temperature: " + temperature);
+        System.out.println("Packaging: " + packaging);
+        for (String step : preparationSteps) {
+            System.out.println("  Preparation: " + step);
+        }
+    }
+
     @Override
     public void handleComplaint(String complaint) {
         if (complaint.equals("too much cheese")) {
