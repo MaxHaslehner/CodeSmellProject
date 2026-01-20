@@ -130,6 +130,50 @@ public class Cashier {
         System.out.println("Applying loyalty points for customer");
     }
 
+    public void processPayment(double amount, String cardNumber, String cvv, String expiryDate) {
+        System.out.println("Processing payment of " + amount);
+        if (cardNumber.length() == 16 && cvv.length() == 3) {
+            System.out.println("Payment accepted from card: " + cardNumber);
+            this.takeOrder("DefaultPizza");
+            this.askForReceipt();
+            System.out.println("Transaction completed");
+        } else {
+            System.out.println("Invalid card details");
+        }
+    }
+
+    public void processRefund(double amount, String cardNumber, String reason, String notes, String authorizedBy) {
+        System.out.println("Processing refund of " + amount + " for reason: " + reason);
+        if (cardNumber != null && cardNumber.length() == 16) {
+            System.out.println("Refund initiated to card: " + cardNumber);
+            System.out.println("Authorized by: " + authorizedBy);
+            System.out.println("Additional notes: " + notes);
+            double refundAmount = amount - (amount * 0.05);
+            System.out.println("Final refund amount after fees: " + refundAmount);
+            System.out.println("Refund processing complete");
+        }
+    }
+
+    public void handleComplexOrderWithDiscount(String pizzaType, double basePrice, boolean isFrequentCustomer, int loyaltyPoints, String discountCode, String specialInstructions) {
+        System.out.println("Handling order for " + pizzaType + " at base price " + basePrice);
+        double finalPrice = basePrice;
+        if (isFrequentCustomer) {
+            finalPrice = finalPrice * 0.9;
+            System.out.println("Applied frequent customer discount");
+        }
+        if (loyaltyPoints > 100) {
+            finalPrice = finalPrice * 0.85;
+            System.out.println("Applied loyalty points discount");
+        }
+        if (discountCode != null && !discountCode.isEmpty()) {
+            finalPrice = finalPrice * 0.8;
+            System.out.println("Applied discount code: " + discountCode);
+        }
+        System.out.println("Special instructions: " + specialInstructions);
+        System.out.println("Final price: " + finalPrice);
+        this.takeOrder(pizzaType);
+    }
+
     public void handleComplaint(String complaint) {
         if (complaint.equals("cold pizza")) {
             this.calmCustomerDown();

@@ -103,6 +103,54 @@ public class Chef {
         System.out.println("Applying loyalty points for customer");
     }
 
+    private int cheeseInventory = 100;
+    private int flourInventory = 50;
+    private int tomatoInventory = 75;
+    private int baseInventory = 30;
+
+    public void checkAndRestockInventory() {
+        System.out.println("Checking inventory levels");
+        if (cheeseInventory < 20) {
+            System.out.println("Restocking cheese");
+            cheeseInventory += 100;
+        }
+        if (flourInventory < 10) {
+            System.out.println("Restocking flour");
+            flourInventory += 50;
+        }
+        if (tomatoInventory < 15) {
+            System.out.println("Restocking tomatoes");
+            tomatoInventory += 100;
+        }
+        if (baseInventory < 5) {
+            System.out.println("Restocking bases");
+            baseInventory += 30;
+        }
+    }
+
+    public void prepareMultiplePizzas(String type1, String type2, String type3) {
+        System.out.println("Preparing pizza 1: " + type1);
+        bakePizza(type1);
+        System.out.println("Preparing pizza 2: " + type2);
+        bakePizza(type2);
+        System.out.println("Preparing pizza 3: " + type3);
+        bakePizza(type3);
+        checkAndRestockInventory();
+        System.out.println("All pizzas prepared");
+    }
+
+    public void sendNotificationsToCustomers(String message, boolean toFrequentCustomers, boolean toNewCustomers, boolean toVIPCustomers) {
+        if (toFrequentCustomers) {
+            System.out.println("Sending notification to frequent customers: " + message);
+        }
+        if (toNewCustomers) {
+            System.out.println("Sending notification to new customers: " + message);
+        }
+        if (toVIPCustomers) {
+            System.out.println("Sending VIP notification: " + message);
+        }
+    }
+
     public void handleComplaint(String complaint) {
         if (complaint.equals("cold pizza")) {
             System.out.println("Handling complaint: Pizza is cold");

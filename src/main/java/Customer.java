@@ -99,6 +99,52 @@ public class Customer {
         this.address = address;
     }
 
+    private int loyaltyPoints = 0;
+    private java.util.List<String> orderHistory = new java.util.ArrayList<>();
+    private java.util.List<String> complaintHistory = new java.util.ArrayList<>();
+
+    public void placeOrderWithLoyaltyTracking(String pizzaType, double price) {
+        System.out.println("Customer " + firstName + " ordering " + pizzaType + " for " + price);
+        this.orderPizza(pizzaType);
+        this.orderHistory.add(pizzaType);
+        int pointsEarned = (int)(price * 10);
+        this.loyaltyPoints += pointsEarned;
+        System.out.println("Earned " + pointsEarned + " loyalty points. Total: " + loyaltyPoints);
+    }
+
+    public void reorderFavoritePizza() {
+        if (!orderHistory.isEmpty()) {
+            String lastOrder = orderHistory.get(orderHistory.size() - 1);
+            System.out.println("Reordering favorite: " + lastOrder);
+            this.orderPizza(lastOrder);
+            this.orderHistory.add(lastOrder);
+            this.orderHistory.add(lastOrder);
+        }
+    }
+
+    public void viewOrderHistoryAndComplain() {
+        System.out.println("Order history for customer " + firstName + ":");
+        for (String order : orderHistory) {
+            System.out.println("  - " + order);
+        }
+        if (complaintHistory.size() > 3) {
+            System.out.println("This customer has many complaints");
+            this.complain("Generally unsatisfied with service");
+        }
+    }
+
+    public void reportIssueWithTracking(String issue, String severity, String description) {
+        System.out.println("Customer reporting issue - Severity: " + severity);
+        System.out.println("Issue: " + issue);
+        System.out.println("Description: " + description);
+        this.complaintHistory.add(issue);
+        this.complain(issue);
+        if (severity.equals("CRITICAL")) {
+            this.complain("CRITICAL ISSUE: " + issue);
+            this.complain("CRITICAL ISSUE: " + issue);
+        }
+    }
+
     public void updatePhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }

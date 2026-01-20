@@ -98,6 +98,53 @@ public class Shop {
         System.out.println("Applying loyalty points for customer");
     }
 
+    private java.util.List<String> activeOrders = new java.util.ArrayList<>();
+    private double totalRevenue = 0;
+    private int totalOrdersProcessed = 0;
+
+    public void processComplexOrder(String pizzaType, int quantity, String customerName, double basePrice, boolean hasDiscount, String discountType, int discountValue) {
+        System.out.println("Processing order for " + customerName);
+        double totalPrice = basePrice * quantity;
+        if (hasDiscount) {
+            if (discountType.equals("PERCENTAGE")) {
+                totalPrice = totalPrice * (1 - (discountValue / 100.0));
+            } else if (discountType.equals("FIXED")) {
+                totalPrice = totalPrice - discountValue;
+            }
+        }
+        this.receiveOrder(pizzaType);
+        this.activeOrders.add(customerName + ": " + quantity + "x " + pizzaType);
+        this.totalRevenue += totalPrice;
+        this.totalOrdersProcessed++;
+        System.out.println("Order total: " + totalPrice);
+        System.out.println("Active orders: " + activeOrders.size());
+    }
+
+    public void manageQueueAndNotify(String nextCustomer, boolean notifyOfDelay, String estimatedTime, boolean sendSMS, String phoneNumber) {
+        System.out.println("Managing order queue");
+        System.out.println("Next customer: " + nextCustomer);
+        if (notifyOfDelay) {
+            System.out.println("Notifying customer of delay");
+            if (sendSMS && phoneNumber != null) {
+                System.out.println("Sending SMS to " + phoneNumber);
+                System.out.println("Estimated time: " + estimatedTime);
+                System.out.println("SMS sent to " + phoneNumber);
+            }
+        }
+    }
+
+    public void generateReportAndAnalytics() {
+        System.out.println("\n=== Shop Report ===");
+        System.out.println("Total Orders Processed: " + totalOrdersProcessed);
+        System.out.println("Total Revenue: " + totalRevenue);
+        System.out.println("Active Orders: " + activeOrders.size());
+        double averageOrderValue = totalOrdersProcessed > 0 ? totalRevenue / totalOrdersProcessed : 0;
+        System.out.println("Average Order Value: " + averageOrderValue);
+        for (int i = 0; i < activeOrders.size(); i++) {
+            System.out.println("Order " + (i+1) + ": " + activeOrders.get(i));
+        }
+    }
+
     public void handleComplaint(String complaint) {
         if (complaint.equals("cold pizza")) {
             cashier.calmCustomerDown();
