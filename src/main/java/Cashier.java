@@ -715,4 +715,65 @@ public class Cashier {
         System.out.println("Total Equity: $" + equityTotal);
         System.out.println("Audit Status: " + auditStatus);
     }
+
+    private java.util.Map<String, java.util.List<Double>> transactionsByCategory = new java.util.HashMap<>();
+    private java.util.List<String> fraudAlerts = new java.util.ArrayList<>();
+
+    public void detectAndReportFraudPatterns(String customerId, double transaction1Amount, double transaction2Amount, double transaction3Amount, String location1, String location2, boolean rapidLocationChange, String timeframe, String riskLevel) {
+        System.out.println("Analyzing fraud patterns for: " + customerId);
+        System.out.println("Transaction 1: $" + transaction1Amount);
+        System.out.println("Transaction 2: $" + transaction2Amount);
+        System.out.println("Transaction 3: $" + transaction3Amount);
+        System.out.println("Location 1: " + location1);
+        System.out.println("Location 2: " + location2);
+        System.out.println("Rapid Location Change: " + rapidLocationChange);
+        System.out.println("Timeframe: " + timeframe);
+        System.out.println("Risk Level: " + riskLevel);
+        if (rapidLocationChange) {
+            fraudAlerts.add(customerId + ": Suspicious location pattern");
+        }
+        double avgTransaction = (transaction1Amount + transaction2Amount + transaction3Amount) / 3;
+        System.out.println("Average Transaction: $" + avgTransaction);
+    }
+
+    public void processSeasonalSalesAndInventoryAdjustment(String season, double expectedDemand, double currentInventory, double reorderPoint, double safetyStock, String supplier1, String supplier2, String supplier3, boolean expediteOrders) {
+        System.out.println("Processing seasonal adjustments for: " + season);
+        System.out.println("Expected Demand: " + expectedDemand);
+        System.out.println("Current Inventory: " + currentInventory);
+        System.out.println("Reorder Point: " + reorderPoint);
+        System.out.println("Safety Stock: " + safetyStock);
+        if (currentInventory < reorderPoint) {
+            System.out.println("Ordering from: " + supplier1 + ", " + supplier2 + ", " + supplier3);
+            if (expediteOrders) {
+                System.out.println("Expedited ordering activated");
+            }
+        }
+        transactionsByCategory.put(season, new java.util.ArrayList<Double>());
+    }
+
+    public void generatePerformanceDashboardSnapshot(String dashboardDate, int totalCashiers, int totalTransactions, double peakHourRevenue, double offPeakRevenue, int averageQueueTime, int maxQueueLength, boolean systemsHealthy, String alerts) {
+        System.out.println("\n=== Performance Dashboard Snapshot ===");
+        System.out.println("Date: " + dashboardDate);
+        System.out.println("Active Cashiers: " + totalCashiers);
+        System.out.println("Total Transactions: " + totalTransactions);
+        System.out.println("Peak Hour Revenue: $" + peakHourRevenue);
+        System.out.println("Off-Peak Revenue: $" + offPeakRevenue);
+        System.out.println("Avg Queue Time: " + averageQueueTime + " seconds");
+        System.out.println("Max Queue Length: " + maxQueueLength);
+        System.out.println("Systems Healthy: " + systemsHealthy);
+        if (!systemsHealthy) {
+            System.out.println("ALERTS: " + alerts);
+        }
+        performanceMetrics.add(dashboardDate + ": " + totalTransactions + " transactions");
+    }
+
+    public void manageVendorRelationshipsAndContracts(String vendor1Name, double vendor1Volume, String vendor1Terms, String vendor2Name, double vendor2Volume, String vendor2Terms, String vendor3Name, double vendor3Volume, String vendor3Terms, String reviewDate) {
+        System.out.println("Managing vendor relationships");
+        System.out.println("Vendor 1: " + vendor1Name + " - Volume: " + vendor1Volume + " - Terms: " + vendor1Terms);
+        System.out.println("Vendor 2: " + vendor2Name + " - Volume: " + vendor2Volume + " - Terms: " + vendor2Terms);
+        System.out.println("Vendor 3: " + vendor3Name + " - Volume: " + vendor3Volume + " - Terms: " + vendor3Terms);
+        System.out.println("Contract Review Date: " + reviewDate);
+        double totalVolume = vendor1Volume + vendor2Volume + vendor3Volume;
+        System.out.println("Total Vendor Volume: " + totalVolume);
+    }
 }

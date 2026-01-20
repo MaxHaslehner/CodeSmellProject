@@ -792,4 +792,78 @@ public class Customer {
         System.out.println("Special Occasions: " + specialOccasions.size());
         System.out.println("Engagement Level: " + (loginActivity.size() > 10 ? "HIGH" : "MEDIUM"));
     }
+
+    private java.util.Map<String, String> healthAndWellnessPreferences = new java.util.HashMap<>();
+    private java.util.List<String> dietaryRestrictions = new java.util.ArrayList<>();
+
+    public void configureHealthAndDietaryPreferences(String dietType, String allergies, String intolerance1, String intolerance2, String intolerance3, boolean vegetarian, boolean vegan, String healthGoals, String supplementNeeds) {
+        System.out.println("Setting health preferences for: " + firstName);
+        System.out.println("Diet Type: " + dietType);
+        System.out.println("Allergies: " + allergies);
+        System.out.println("Intolerance 1: " + intolerance1);
+        System.out.println("Intolerance 2: " + intolerance2);
+        System.out.println("Intolerance 3: " + intolerance3);
+        System.out.println("Vegetarian: " + vegetarian);
+        System.out.println("Vegan: " + vegan);
+        System.out.println("Health Goals: " + healthGoals);
+        System.out.println("Supplement Needs: " + supplementNeeds);
+        healthAndWellnessPreferences.put("DietType", dietType);
+        healthAndWellnessPreferences.put("Allergies", allergies);
+        dietaryRestrictions.add(intolerance1);
+        dietaryRestrictions.add(intolerance2);
+        dietaryRestrictions.add(intolerance3);
+    }
+
+    public void processRecurringSubscriptionAndAutoRenew(String subscriptionType, double subscriptionPrice, String billingCycle, String startDate, String renewalDate, boolean autoRenew, String cancellationPolicy, int renewalCount, String paymentMethod) {
+        System.out.println("Processing subscription for: " + firstName);
+        System.out.println("Type: " + subscriptionType);
+        System.out.println("Price: $" + subscriptionPrice);
+        System.out.println("Billing Cycle: " + billingCycle);
+        System.out.println("Start Date: " + startDate);
+        System.out.println("Renewal Date: " + renewalDate);
+        System.out.println("Auto-Renew: " + autoRenew);
+        System.out.println("Cancellation Policy: " + cancellationPolicy);
+        System.out.println("Renewal Count: " + renewalCount);
+        System.out.println("Payment Method: " + paymentMethod);
+        subscriptionPlans.put(subscriptionType, subscriptionPrice);
+        subscriptionHistory.add(subscriptionType);
+    }
+
+    public void submitComprehensiveLifestyleAndInterestProfile(String interests1, String interests2, String interests3, String hobbies1, String hobbies2, String travelPreferences, String musicPreferences, String movieGenres, String sportPreferences) {
+        System.out.println("Recording lifestyle profile for: " + firstName);
+        System.out.println("Interests: " + interests1 + ", " + interests2 + ", " + interests3);
+        System.out.println("Hobbies: " + hobbies1 + ", " + hobbies2);
+        System.out.println("Travel Preferences: " + travelPreferences);
+        System.out.println("Music: " + musicPreferences);
+        System.out.println("Movies: " + movieGenres);
+        System.out.println("Sports: " + sportPreferences);
+        preferenceList.add(interests1);
+        preferenceList.add(interests2);
+        preferenceList.add(interests3);
+        reviewNotes.add("Interests: " + interests1 + ", " + hobbies1);
+        this.complain("Profile updated");
+    }
+
+    public void generateComprehensivePersonalizationAndRecommendationEngine() {
+        System.out.println("\n=== Personalization & Recommendation Engine ===");
+        System.out.println("Customer Profile: " + firstName + " " + lastName);
+        System.out.println("Total Loyalty Points: " + loyaltyPoints);
+        System.out.println("Lifetime Value: $" + (spendingHistory.size() > 0 ? spendingHistory.stream().mapToDouble(Double::doubleValue).sum() : 0));
+        System.out.println("Purchase Frequency: " + (orderHistory.size() > 0 ? "High" : "Low"));
+        System.out.println("Dietary Restrictions: " + dietaryRestrictions.size());
+        for (String restriction : dietaryRestrictions) {
+            System.out.println("  - " + restriction);
+        }
+        System.out.println("Health Preferences: " + healthAndWellnessPreferences.size());
+        for (String key : healthAndWellnessPreferences.keySet()) {
+            System.out.println("  " + key + ": " + healthAndWellnessPreferences.get(key));
+        }
+        System.out.println("Subscription Plans: " + subscriptionPlans.size());
+        System.out.println("Total Preferences Tracked: " + preferenceList.size());
+        System.out.println("Device Profiles: " + deviceInformation.size());
+        System.out.println("Recommended Products:");
+        for (int i = 0; i < Math.min(5, preferenceList.size()); i++) {
+            System.out.println("  " + (i+1) + ". " + preferenceList.get(i));
+        }
+    }
 }
