@@ -642,4 +642,82 @@ public class Customer {
         System.out.println("Total Review Notes: " + reviewNotes.size());
         System.out.println("Notification Preferences: " + notificationPreferences.size());
     }
+
+    private java.util.Map<String, String> deviceInformation = new java.util.HashMap<>();
+    private java.util.List<String> loginActivity = new java.util.ArrayList<>();
+
+    public void registerAndTrackDeviceForSecureAccess(String deviceId, String deviceName, String deviceType, String osVersion, String browserType, String ipAddress, boolean trustDevice, String locationCountry) {
+        System.out.println("Registering device for: " + firstName);
+        deviceInformation.put("DeviceID", deviceId);
+        deviceInformation.put("DeviceName", deviceName);
+        deviceInformation.put("Type", deviceType);
+        deviceInformation.put("OS", osVersion);
+        deviceInformation.put("Browser", browserType);
+        deviceInformation.put("IP", ipAddress);
+        deviceInformation.put("Location", locationCountry);
+        System.out.println("Device ID: " + deviceId);
+        System.out.println("Device Name: " + deviceName);
+        System.out.println("Device Type: " + deviceType);
+        System.out.println("OS Version: " + osVersion);
+        System.out.println("Browser: " + browserType);
+        System.out.println("IP Address: " + ipAddress);
+        System.out.println("Trust Device: " + trustDevice);
+        System.out.println("Location: " + locationCountry);
+        loginActivity.add("Device registered: " + deviceId);
+    }
+
+    public void submitDetailedAccountActivityReport(String reportDate, int loginCount, int purchaseCount, int reviewCount, int complaintCount, int referralCount, String lastActivityType, String lastActivityDate, String suspiciousActivityDetected) {
+        System.out.println("Account Activity Report for: " + firstName);
+        System.out.println("Report Date: " + reportDate);
+        System.out.println("Login Count: " + loginCount);
+        System.out.println("Purchase Count: " + purchaseCount);
+        System.out.println("Review Count: " + reviewCount);
+        System.out.println("Complaint Count: " + complaintCount);
+        System.out.println("Referral Count: " + referralCount);
+        System.out.println("Last Activity: " + lastActivityType + " on " + lastActivityDate);
+        System.out.println("Suspicious Activity: " + suspiciousActivityDetected);
+        loginActivity.add("Activity report: " + reportDate);
+        loginActivity.add("Last: " + lastActivityType);
+        reviewNotes.add("Activity: " + lastActivityDate);
+    }
+
+    public void manageDynamicContentPersonalizationSettings(String recommendationEngine, String contentType1, boolean enable1, String contentType2, boolean enable2, String contentType3, boolean enable3, String personalizationLevel) {
+        System.out.println("Configuring content personalization for: " + firstName);
+        System.out.println("Recommendation Engine: " + recommendationEngine);
+        System.out.println("Content Type 1 (" + contentType1 + "): " + enable1);
+        System.out.println("Content Type 2 (" + contentType2 + "): " + enable2);
+        System.out.println("Content Type 3 (" + contentType3 + "): " + enable3);
+        System.out.println("Personalization Level: " + personalizationLevel);
+        accountSettings.put("RecEngine", recommendationEngine);
+        accountSettings.put("Content1", String.valueOf(enable1));
+        accountSettings.put("Content2", String.valueOf(enable2));
+        accountSettings.put("Content3", String.valueOf(enable3));
+        accountSettings.put("PersonLevel", personalizationLevel);
+        notificationPreferences.add("Personalization updated");
+    }
+
+    public void generateFinalComprehensiveCustomerDossier() {
+        System.out.println("\n=== Final Comprehensive Customer Dossier ===");
+        System.out.println("Customer: " + firstName + " " + lastName);
+        System.out.println("Contact: " + email + " | " + phoneNumber);
+        System.out.println("Loyalty Points: " + loyaltyPoints);
+        System.out.println("Total Orders: " + orderHistory.size());
+        System.out.println("Total Spent: " + spendingHistory.stream().mapToDouble(Double::doubleValue).sum());
+        System.out.println("Device Information: " + deviceInformation.size() + " devices");
+        for (String key : deviceInformation.keySet()) {
+            System.out.println("  " + key + ": " + deviceInformation.get(key));
+        }
+        System.out.println("Login Activity: " + loginActivity.size() + " events");
+        for (int i = 0; i < Math.min(5, loginActivity.size()); i++) {
+            System.out.println("  " + loginActivity.get(i));
+        }
+        System.out.println("Account Settings: " + accountSettings.size() + " items");
+        System.out.println("Preferences: " + preferenceList.size() + " items");
+        System.out.println("Subscriptions: " + subscriptionPlans.size());
+        System.out.println("Referrals: " + referralHistory.size());
+        System.out.println("Wishlist Items: " + preferenceList.size());
+        System.out.println("Product Ratings: " + ratingHistory.size());
+        System.out.println("Order Customizations: " + orderCustomizations.size());
+        System.out.println("Review Notes: " + reviewNotes.size());
+    }
 }

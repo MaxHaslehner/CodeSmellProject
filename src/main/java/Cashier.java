@@ -583,4 +583,71 @@ public class Cashier {
         }
         auditLog.add("Reconciliation: " + reconciliationDate + " - " + totalAmount);
     }
+
+    private java.util.Map<String, String> complianceChecklist = new java.util.HashMap<>();
+    private java.util.List<String> auditTrail = new java.util.ArrayList<>();
+
+    public void executeComplianceCheckAndReport(String checkDate, boolean kycCompleted, boolean amlCompleted, boolean fatcaCompleted, boolean gdprCompleted, boolean pciCompleted, String complianceOfficer, String approvalStatus) {
+        System.out.println("Executing compliance check for: " + checkDate);
+        System.out.println("KYC Completed: " + kycCompleted);
+        System.out.println("AML Completed: " + amlCompleted);
+        System.out.println("FATCA Completed: " + fatcaCompleted);
+        System.out.println("GDPR Completed: " + gdprCompleted);
+        System.out.println("PCI Completed: " + pciCompleted);
+        System.out.println("Compliance Officer: " + complianceOfficer);
+        complianceChecklist.put("KYC", String.valueOf(kycCompleted));
+        complianceChecklist.put("AML", String.valueOf(amlCompleted));
+        complianceChecklist.put("FATCA", String.valueOf(fatcaCompleted));
+        complianceChecklist.put("GDPR", String.valueOf(gdprCompleted));
+        complianceChecklist.put("PCI", String.valueOf(pciCompleted));
+        System.out.println("Approval Status: " + approvalStatus);
+        auditTrail.add(checkDate + ": " + approvalStatus);
+    }
+
+    public void handleComplexOrderManagementWorkflow(String orderId, String customerId, String productItems, int quantity, double totalAmount, String shippingAddress, String billingAddress, boolean expressShipping, String trackingPreference) {
+        System.out.println("Processing complex order: " + orderId);
+        System.out.println("Customer: " + customerId);
+        System.out.println("Products: " + productItems);
+        System.out.println("Quantity: " + quantity);
+        System.out.println("Total: $" + totalAmount);
+        System.out.println("Shipping Address: " + shippingAddress);
+        System.out.println("Billing Address: " + billingAddress);
+        System.out.println("Express Shipping: " + expressShipping);
+        System.out.println("Tracking Preference: " + trackingPreference);
+        if (expressShipping) {
+            double totalWithExpedite = totalAmount * 1.15;
+            System.out.println("Expedited Total: $" + totalWithExpedite);
+        }
+        this.takeOrder(productItems);
+        this.takeOrder(productItems);
+    }
+
+    public void processMonthlyRevenueReconciliationAndForecasting(String month, String year, double projectedRevenue, double actualRevenue, double expensesBudget, double actualExpenses, double profitMargin, boolean meetsTarget, String forecastForNextMonth) {
+        System.out.println("\n=== Monthly Revenue Reconciliation ===");
+        System.out.println("Period: " + month + "/" + year);
+        System.out.println("Projected Revenue: $" + projectedRevenue);
+        System.out.println("Actual Revenue: $" + actualRevenue);
+        double variancePercent = ((actualRevenue - projectedRevenue) / projectedRevenue) * 100;
+        System.out.println("Variance: " + variancePercent + "%");
+        System.out.println("Expenses Budget: $" + expensesBudget);
+        System.out.println("Actual Expenses: $" + actualExpenses);
+        System.out.println("Profit Margin: " + profitMargin + "%");
+        System.out.println("Meets Target: " + meetsTarget);
+        System.out.println("Next Month Forecast: " + forecastForNextMonth);
+        settlementRecords.add("Month " + month + ": Revenue=$" + actualRevenue + ", Expenses=$" + actualExpenses);
+    }
+
+    public void initializeCashierSessionAndValidateFunds(String cashierId, String sessionId, double expectedOpeningBalance, double actualOpeningBalance, boolean balanceVerified, String shiftType, String supervisor) {
+        System.out.println("Initializing cashier session: " + sessionId);
+        System.out.println("Cashier: " + cashierId);
+        System.out.println("Expected Opening: $" + expectedOpeningBalance);
+        System.out.println("Actual Opening: $" + actualOpeningBalance);
+        if (expectedOpeningBalance != actualOpeningBalance) {
+            System.out.println("WARNING: Opening balance discrepancy detected!");
+        }
+        System.out.println("Verified: " + balanceVerified);
+        System.out.println("Shift Type: " + shiftType);
+        System.out.println("Supervisor: " + supervisor);
+        auditTrail.add("Session " + sessionId + " started by " + cashierId);
+    }
 }
