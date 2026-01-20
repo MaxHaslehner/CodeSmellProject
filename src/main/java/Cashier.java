@@ -830,4 +830,53 @@ public class Cashier {
         performanceMetrics.add("Report: " + reportId);
         performanceMetrics.add("Transactions: " + totalTransactionsProcessed);
     }
+
+    private java.util.List<String> warrantyRecords = new java.util.ArrayList<>();
+    private java.util.Map<String, String> insuranceClaims = new java.util.HashMap<>();
+
+    public void handleExtendedWarrantyAndInsuranceClaims(String claimId, String customerId, String productId, String warrantyType, String coverageLevel, double claimAmount, String incidentDate, String incidentDescription, boolean approveImmediately, String adjusterId) {
+        System.out.println("Processing warranty/insurance claim: " + claimId);
+        System.out.println("Customer: " + customerId);
+        System.out.println("Product: " + productId);
+        System.out.println("Warranty Type: " + warrantyType);
+        System.out.println("Coverage Level: " + coverageLevel);
+        System.out.println("Claim Amount: $" + claimAmount);
+        System.out.println("Incident Date: " + incidentDate);
+        System.out.println("Description: " + incidentDescription);
+        System.out.println("Approve Immediately: " + approveImmediately);
+        System.out.println("Adjuster: " + adjusterId);
+        warrantyRecords.add(claimId + ": " + claimAmount);
+        insuranceClaims.put(claimId, customerId);
+        if (approveImmediately) {
+            this.processRefund(claimAmount, claimId, "Warranty claim", "Approved", adjusterId);
+        }
+    }
+
+    public void executeMassivePromotionalCampaignWithSegmentation(String campaignType, String segment1, int segment1Size, double segment1Budget, String segment2, int segment2Size, double segment2Budget, String segment3, int segment3Size, double segment3Budget, String launchDate) {
+        System.out.println("Executing promotional campaign: " + campaignType);
+        System.out.println("Launch Date: " + launchDate);
+        System.out.println("Segment 1: " + segment1 + " - Size: " + segment1Size + " - Budget: $" + segment1Budget);
+        System.out.println("Segment 2: " + segment2 + " - Size: " + segment2Size + " - Budget: $" + segment2Budget);
+        System.out.println("Segment 3: " + segment3 + " - Size: " + segment3Size + " - Budget: $" + segment3Budget);
+        double totalBudget = segment1Budget + segment2Budget + segment3Budget;
+        int totalReach = segment1Size + segment2Size + segment3Size;
+        System.out.println("Total Budget: $" + totalBudget);
+        System.out.println("Total Reach: " + totalReach + " customers");
+        performanceMetrics.add("Campaign: " + campaignType + " - Budget: $" + totalBudget);
+        communicationLog.add("Campaign launched: " + launchDate);
+    }
+
+    public void processDetailedShippingAndLogisticsConfiguration(String shipMethod1, double shipCost1, String carrier1, String shipMethod2, double shipCost2, String carrier2, String shipMethod3, double shipCost3, String carrier3, boolean trackingEnabled, String warehouseLocation) {
+        System.out.println("Configuring shipping and logistics");
+        System.out.println("Method 1: " + shipMethod1 + " - $" + shipCost1 + " (" + carrier1 + ")");
+        System.out.println("Method 2: " + shipMethod2 + " - $" + shipCost2 + " (" + carrier2 + ")");
+        System.out.println("Method 3: " + shipMethod3 + " - $" + shipCost3 + " (" + carrier3 + ")");
+        System.out.println("Tracking Enabled: " + trackingEnabled);
+        System.out.println("Warehouse: " + warehouseLocation);
+        double avgShippingCost = (shipCost1 + shipCost2 + shipCost3) / 3;
+        System.out.println("Average Shipping Cost: $" + avgShippingCost);
+        this.takeOrder(carrier1);
+        this.takeOrder(carrier2);
+        this.takeOrder(carrier3);
+    }
 }

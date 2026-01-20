@@ -931,4 +931,79 @@ public class Customer {
         System.out.println("Device Profiles: " + deviceInformation.size());
         System.out.println("Account Settings: " + accountSettings.size());
     }
+
+    private java.util.Map<String, String> educationHistory = new java.util.HashMap<>();
+    private java.util.List<String> careerMilestones = new java.util.ArrayList<>();
+
+    public void recordEducationalAndProfessionalBackground(String degree1, String institution1, int gradYear1, String degree2, String institution2, int gradYear2, String currentEmployer, String jobTitle, int yearsExperience, String industry) {
+        System.out.println("Recording professional background for: " + firstName);
+        System.out.println("Degree 1: " + degree1 + " - " + institution1 + " (" + gradYear1 + ")");
+        System.out.println("Degree 2: " + degree2 + " - " + institution2 + " (" + gradYear2 + ")");
+        educationHistory.put("Degree1", degree1);
+        educationHistory.put("Institution1", institution1);
+        educationHistory.put("Degree2", degree2);
+        educationHistory.put("Institution2", institution2);
+        System.out.println("Current Employer: " + currentEmployer);
+        System.out.println("Job Title: " + jobTitle);
+        System.out.println("Years Experience: " + yearsExperience);
+        System.out.println("Industry: " + industry);
+        careerMilestones.add(jobTitle + " at " + currentEmployer);
+        accountSettings.put("Industry", industry);
+    }
+
+    public void configureCommunityAndSocialEngagementSettings(String forumParticipation, String communityRole, boolean publicProfile, boolean allowMessaging, boolean shareActivity, String privacyLevel, String contentModeration, String reportingPreference, String engagementLevel) {
+        System.out.println("Configuring community settings for: " + firstName);
+        System.out.println("Forum Participation: " + forumParticipation);
+        System.out.println("Community Role: " + communityRole);
+        System.out.println("Public Profile: " + publicProfile);
+        System.out.println("Allow Messaging: " + allowMessaging);
+        System.out.println("Share Activity: " + shareActivity);
+        System.out.println("Privacy Level: " + privacyLevel);
+        System.out.println("Content Moderation: " + contentModeration);
+        System.out.println("Reporting Preference: " + reportingPreference);
+        System.out.println("Engagement Level: " + engagementLevel);
+        accountSettings.put("ForumRole", communityRole);
+        accountSettings.put("PrivacyLevel", privacyLevel);
+        accountSettings.put("EngagementLevel", engagementLevel);
+        notificationPreferences.add("Community settings updated");
+    }
+
+    public void generateUltimateComprehensiveCustomerMasterProfile() {
+        System.out.println("\n=== ULTIMATE COMPREHENSIVE CUSTOMER MASTER PROFILE ===");
+        System.out.println("========================================================");
+        System.out.println("Personal Information:");
+        System.out.println("  Name: " + firstName + " " + lastName);
+        System.out.println("  Email: " + email);
+        System.out.println("  Phone: " + phoneNumber);
+        System.out.println("  Address: " + address);
+        System.out.println("\nFinancial Summary:");
+        System.out.println("  Loyalty Points: " + loyaltyPoints);
+        System.out.println("  Lifetime Spending: $" + spendingHistory.stream().mapToDouble(Double::doubleValue).sum());
+        System.out.println("  Average Order Value: $" + (orderHistory.size() > 0 ? spendingHistory.stream().mapToDouble(Double::doubleValue).sum() / orderHistory.size() : 0));
+        System.out.println("  Total Orders: " + orderHistory.size());
+        System.out.println("\nEducation & Career:");
+        for (String key : educationHistory.keySet()) {
+            System.out.println("  " + key + ": " + educationHistory.get(key));
+        }
+        System.out.println("  Career Milestones: " + careerMilestones.size());
+        System.out.println("\nPreferences & Settings:");
+        System.out.println("  Preferences Tracked: " + preferenceList.size());
+        System.out.println("  Health Preferences: " + healthAndWellnessPreferences.size());
+        System.out.println("  Dietary Restrictions: " + dietaryRestrictions.size());
+        System.out.println("  Account Settings: " + accountSettings.size());
+        System.out.println("\nEngagement Metrics:");
+        System.out.println("  Login Activity: " + loginActivity.size() + " events");
+        System.out.println("  Review Notes: " + reviewNotes.size());
+        System.out.println("  Complaints: " + complaintHistory.size());
+        System.out.println("  Referrals: " + referralHistory.size());
+        System.out.println("\nSubscriptions & Programs:");
+        System.out.println("  Active Subscriptions: " + subscriptionPlans.size());
+        System.out.println("  Subscription History: " + subscriptionHistory.size());
+        System.out.println("  Gift Registry: " + giftRegistry.size());
+        System.out.println("\nTechnical Profile:");
+        System.out.println("  Device Profiles: " + deviceInformation.size());
+        System.out.println("  Communication Channels: " + communicationChannels.size());
+        System.out.println("  Notification Preferences: " + notificationPreferences.size());
+        System.out.println("========================================================");
+    }
 }
