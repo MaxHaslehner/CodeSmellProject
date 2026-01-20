@@ -246,4 +246,57 @@ public class Cashier {
             System.out.println("  Transaction " + (i+1) + ": " + transactionHistory.get(i));
         }
     }
+
+    private java.util.Map<String, Double> customerBalances = new java.util.HashMap<>();
+    private java.util.Map<String, String> paymentMethods = new java.util.HashMap<>();
+
+    public void updateCustomerBalance(String customerId, double amount, String paymentMethod, String status, boolean processImmediately) {
+        System.out.println("Updating balance for customer: " + customerId);
+        if (customerBalances.containsKey(customerId)) {
+            double currentBalance = customerBalances.get(customerId);
+            double newBalance = currentBalance + amount;
+            customerBalances.put(customerId, newBalance);
+            System.out.println("Previous balance: " + currentBalance + ", New balance: " + newBalance);
+        } else {
+            customerBalances.put(customerId, amount);
+        }
+        paymentMethods.put(customerId, paymentMethod);
+        System.out.println("Status: " + status);
+        if (processImmediately) {
+            this.processPaymentForCustomer(customerId, amount);
+            System.out.println("Payment processed immediately");
+        }
+    }
+
+    public void validateAndProcessLargeTransaction(String customerId, double amount, String cardType, String cardLastFour, String expiryMonth, String expiryYear, String cvv, String billingZip) {
+        System.out.println("Validating large transaction for: " + customerId + " Amount: " + amount);
+        if (amount > 1000) {
+            System.out.println("High value transaction detected");
+            this.processRefund(amount, cardLastFour, "Verification pending", "Transaction under review", "Manager");
+            System.out.println("Card Type: " + cardType);
+            System.out.println("Last Four: " + cardLastFour);
+            System.out.println("Expiry: " + expiryMonth + "/" + expiryYear);
+            System.out.println("Billing Zip: " + billingZip);
+            System.out.println("Verification complete");
+        } else {
+            this.processPaymentForCustomer(customerId, amount);
+        }
+    }
+
+    public void generateDetailedCustomerReport(String customerId) {
+        System.out.println("\n=== Customer Report for " + customerId + " ===");
+        if (customerBalances.containsKey(customerId)) {
+            System.out.println("Balance: " + customerBalances.get(customerId));
+            System.out.println("Payment Method: " + paymentMethods.get(customerId));
+            System.out.println("Transaction Count: " + totalTransactions);
+            System.out.println("Total Processed: " + totalCashProcessed);
+            for (String trans : transactionHistory) {
+                if (trans.contains(customerId)) {
+                    System.out.println("  " + trans);
+                }
+            }
+        } else {
+            System.out.println("Customer not found");
+        }
+    }
 }

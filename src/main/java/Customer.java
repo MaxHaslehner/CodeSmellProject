@@ -250,4 +250,67 @@ public class Customer {
         this.complaintHistory.add(mainIssue);
         this.complaintHistory.add(detail1);
     }
+
+    private java.util.Map<String, Integer> ratingHistory = new java.util.HashMap<>();
+    private java.util.List<String> reviewNotes = new java.util.ArrayList<>();
+
+    public void submitMultipleRatings(String category1, int rating1, String category2, int rating2, String category3, int rating3, String category4, int rating4) {
+        System.out.println("Customer " + firstName + " submitting ratings");
+        ratingHistory.put(category1, rating1);
+        ratingHistory.put(category2, rating2);
+        ratingHistory.put(category3, rating3);
+        ratingHistory.put(category4, rating4);
+        System.out.println(category1 + ": " + rating1);
+        System.out.println(category2 + ": " + rating2);
+        System.out.println(category3 + ": " + rating3);
+        System.out.println(category4 + ": " + rating4);
+        this.complain("Ratings submitted");
+    }
+
+    public void trackOrderProgressAndNotify(String orderId, String status1, String status2, String status3, String status4, boolean sendNotifications) {
+        System.out.println("Tracking order: " + orderId);
+        System.out.println("Status 1: " + status1);\n        reviewNotes.add(status1);
+        System.out.println("Status 2: " + status2);
+        reviewNotes.add(status2);
+        System.out.println("Status 3: " + status3);
+        reviewNotes.add(status3);
+        System.out.println("Status 4: " + status4);
+        reviewNotes.add(status4);
+        if (sendNotifications) {
+            this.complain("Status update: " + status1);\n            this.complain("Status update: " + status2);
+            this.complain("Status update: " + status3);
+        }
+    }
+
+    public void recordPurchasePreferencesAndBehavior(String preference1, String preference2, String preference3, String frequency, String averageSpend, String preferredTime) {
+        System.out.println("Recording purchase behavior for: " + firstName);
+        preferenceList.add(preference1);
+        preferenceList.add(preference2);
+        preferenceList.add(preference3);
+        System.out.println("Preference 1: " + preference1);
+        System.out.println("Preference 2: " + preference2);
+        System.out.println("Preference 3: " + preference3);
+        System.out.println("Purchase Frequency: " + frequency);
+        System.out.println("Average Spend: " + averageSpend);
+        System.out.println("Preferred Time: " + preferredTime);
+        this.visitCount++;
+        for (String pref : preferenceList) {
+            System.out.println("  - " + pref);
+        }
+    }
+
+    public void generateComprehensiveCustomerProfile() {
+        System.out.println("\n=== Customer Profile for " + firstName + " " + lastName + " ===");
+        System.out.println("Contact: " + email + " | " + phoneNumber);
+        System.out.println("Address: " + address);
+        System.out.println("Loyalty Points: " + loyaltyPoints);
+        System.out.println("Visit Count: " + visitCount);
+        System.out.println("Ratings Submitted: " + ratingHistory.size());
+        for (String category : ratingHistory.keySet()) {
+            System.out.println("  " + category + ": " + ratingHistory.get(category));
+        }
+        System.out.println("Order History: " + orderHistory.size() + " orders");
+        System.out.println("Complaint History: " + complaintHistory.size() + " complaints");
+        System.out.println("Review Notes: " + reviewNotes.size() + " notes");
+    }
 }
