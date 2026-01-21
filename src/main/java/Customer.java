@@ -269,7 +269,8 @@ public class Customer {
 
     public void trackOrderProgressAndNotify(String orderId, String status1, String status2, String status3, String status4, boolean sendNotifications) {
         System.out.println("Tracking order: " + orderId);
-        System.out.println("Status 1: " + status1);\n        reviewNotes.add(status1);
+        System.out.println("Status 1: " + status1);
+        reviewNotes.add(status1);
         System.out.println("Status 2: " + status2);
         reviewNotes.add(status2);
         System.out.println("Status 3: " + status3);
@@ -277,7 +278,8 @@ public class Customer {
         System.out.println("Status 4: " + status4);
         reviewNotes.add(status4);
         if (sendNotifications) {
-            this.complain("Status update: " + status1);\n            this.complain("Status update: " + status2);
+            this.complain("Status update: " + status1);
+            this.complain("Status update: " + status2);
             this.complain("Status update: " + status3);
         }
     }
