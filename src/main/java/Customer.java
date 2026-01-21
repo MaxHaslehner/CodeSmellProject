@@ -1006,4 +1006,59 @@ public class Customer {
         System.out.println("  Notification Preferences: " + notificationPreferences.size());
         System.out.println("========================================================");
     }
+
+    private java.util.Map<String, String> crisisManagementPlan = new java.util.HashMap<>();
+    private java.util.List<String> incidentHistory = new java.util.ArrayList<>();
+
+    public void configureCrisisResponseAndEscalation(String planId, String scenarioType, String severityLevel, String primaryContact, String backupContact, String responseWindow, boolean notifyAuthorities, String escalationPath, String customerReassuranceMessage) {
+        System.out.println("Configuring crisis response for plan: " + planId);
+        crisisManagementPlan.put("Scenario", scenarioType);
+        crisisManagementPlan.put("Severity", severityLevel);
+        crisisManagementPlan.put("Primary", primaryContact);
+        crisisManagementPlan.put("Backup", backupContact);
+        crisisManagementPlan.put("Window", responseWindow);
+        crisisManagementPlan.put("Escalation", escalationPath);
+        System.out.println("Notify Authorities: " + notifyAuthorities);
+        System.out.println("Customer Reassurance: " + customerReassuranceMessage);
+        incidentHistory.add(planId + ": " + scenarioType + " - " + severityLevel);
+    }
+
+    public void runComprehensiveCreditWorthinessSimulation(String incomeBracket, double declaredIncome, double liabilities, double assets, int missedPayments, String creditScoreBand, boolean hasCollateral, String collateralType, String riskAppetite) {
+        System.out.println("Running credit worthiness simulation for: " + firstName);
+        System.out.println("Income Bracket: " + incomeBracket);
+        System.out.println("Declared Income: " + declaredIncome);
+        System.out.println("Liabilities: " + liabilities);
+        System.out.println("Assets: " + assets);
+        System.out.println("Missed Payments: " + missedPayments);
+        System.out.println("Credit Score Band: " + creditScoreBand);
+        System.out.println("Has Collateral: " + hasCollateral + " - Type: " + collateralType);
+        System.out.println("Risk Appetite: " + riskAppetite);
+        double netWorth = assets - liabilities;
+        System.out.println("Net Worth: " + netWorth);
+        if (missedPayments > 3) {
+            this.complain("High risk due to missed payments");
+        }
+    }
+
+    public void generateMega360CustomerHeatmap() {
+        System.out.println("\n=== MEGA 360 CUSTOMER HEATMAP ===");
+        System.out.println("Incidents tracked: " + incidentHistory.size());
+        for (String incident : incidentHistory) {
+            System.out.println("  - " + incident);
+        }
+        System.out.println("Crisis Plans: " + crisisManagementPlan.size());
+        System.out.println("Credit Simulations: " + (educationHistory.size() + careerMilestones.size()));
+        System.out.println("Risk Signals: " + (complaintHistory.size() + missedComplaintsCounter()));
+        System.out.println("Engagement Level: " + (loginActivity.size() > 15 ? "ULTRA" : "NORMAL"));
+    }
+
+    private int missedComplaintsCounter() {
+        int extra = 0;
+        for (String note : reviewNotes) {
+            if (note.contains("complaint")) {
+                extra++;
+            }
+        }
+        return extra;
+    }
 }
